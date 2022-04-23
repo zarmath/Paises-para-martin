@@ -1,0 +1,43 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[  ]
+_global_script_class_icons={
+}
+
+[application]
+
+config/name="Paises para Martin"
+run/main_scene="res://Scenes/bienvenida.tscn"
+config/icon="res://Iconos/logo192.png"
+
+[autoload]
+
+Globals="*res://Scripts/globals.gd"
+
+[display]
+
+window/size/width=600
+window/size/height=1150
+window/size/test_width=520
+window/size/test_height=1000
+window/handheld/orientation="portrait"
+
+[locale]
+
+translations=PoolStringArray( "res://traducciones/traduccion paises para martin.en.translation", "res://traducciones/traduccion paises para martin.es.translation" )
+
+[rendering]
+
+quality/driver/driver_name="GLES2"
+vram_compression/import_etc=true
+vram_compression/import_etc2=false
+environment/default_clear_color=Color( 0.0901961, 0.0823529, 0.333333, 1 )
+environment/default_environment="res://default_env.tres"
