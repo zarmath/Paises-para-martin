@@ -7,6 +7,7 @@ var arrayPublicidad = [
 	["res://publicidad/cover.png", "publi_cover","https://apps.apple.com/es/app/cover-of-knight/id1561834977","https://play.google.com/store/apps/details?id=com.garajeimagina.coverknight"],
 	["res://publicidad/krepzen.png", "publi_krepzen","https://apps.apple.com/es/app/krepzen/id1551653313","https://play.google.com/store/apps/details?id=com.garajeimagina.krepzen&hl=es&gl=US"],
 	["res://publicidad/multiplicatron.png", "publi_multiplicatron","https://apps.apple.com/us/app/multiplication-tables-visual/id1528703608?itsct=apps_box&itscg=30200","https://play.google.com/store/apps/details?id=org.godotengine.tablasdemultiplicar&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1"],
+	["res://publicidad/number.png", "publi_number","https://apps.apple.com/es/app/number-hopper/id1611531779","https://play.google.com/store/apps/details?id=com.garajeimagina.numberhooper&hl=es&gl=US"],
 ]
 
 
@@ -24,13 +25,7 @@ func _ready() -> void:
 	#actualizo los datos de la publicidad
 	miniatura.texture = load(arrayPublicidad[ordenArray][0])
 	explicacion.set_text(tr(arrayPublicidad[ordenArray][1]))
-	print(tr(arrayPublicidad[ordenArray][1]))
-
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta: float) -> void:
-#	pass
+	#print(tr(arrayPublicidad[ordenArray][1]))
 
 
 func _on_enlaceJuego_pressed() -> void:

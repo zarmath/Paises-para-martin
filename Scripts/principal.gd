@@ -13,30 +13,38 @@ var opcion
 
 func _ready():
 	Globals.leer_json_total("data")
+	VisualServer.set_default_clear_color("171555")
 	intentos = 1
 	aciertos = 0
 	numPaises = Globals.json_data_total.size() - 1
 	#numPaises = 249
 	#tamaños
 	$margin.rect_size.x = Globals.pantallaTamano.x
-	$margin/horizontal.rect_min_size.x = Globals.pantallaTamano.x
-	$margin/horizontal/container/marginPais.rect_min_size.x = Globals.pantallaTamano.x - 250
-	$margin/horizontal/contenedorNombreCompleto.rect_min_size.x = Globals.pantallaTamano.x
-	#publicidad
+	$margin/horizontal.rect_size.x = Globals.pantallaTamano.x
+	$margin/horizontal/container/marginPais.rect_size.x = Globals.pantallaTamano.x - 250
+	$margin/horizontal/contenedorNombreCompleto.rect_size.x = Globals.pantallaTamano.x
+	$marginMarcador.rect_size.x = Globals.pantallaTamano.x
+	$marginSiguiente.rect_size.x = Globals.pantallaTamano.x
+	$marginMarcador.rect_size.y = 70
+	$marginMarcador/panelMarcador.rect_size.y = 70
+	$marginSiguiente.rect_size.y = 70
+	$marginSiguiente.rect_min_size.y = 70
+	$marginSiguiente/siguiente.rect_size.y = 70
+	$marginSiguiente/siguiente.rect_min_size.y = 70
+	#posiciones
 	$publicidad.position.x = Globals.marcoPantalla
 	$publicidad.position.y = Globals.pantallaTamano.y - 110
-	#print(Globals.pantallaTamano,"|",$margin.get_size(),"|",Globals.pantallaTamano.x - 250)
+	$marginMarcador.rect_position.y = Globals.pantallaTamano.y - 270
+	$marginSiguiente.rect_position.y = Globals.pantallaTamano.y - 200
 	$margin/horizontal/container/marginBandera.rect_min_size.x = 250
+	$marginMarcador/marcador.text = "0/0"
 	pais_al_azar()
-	
-	
-
 
 
 func pais_al_azar():
 	#escondo el resultado
 	$margin/horizontal/contenedorResultado.hide()
-	$margin/horizontal/siguiente.hide()
+	$marginSiguiente/siguiente.hide()
 	randomize()
 	#var cantidadPaises = Globals.json_data_total.size()
 	#print(cantidadPaises)
@@ -89,7 +97,7 @@ func pais_al_azar():
 		$margin/horizontal/container/marginBandera/bandera.texture = load(cadPais)
 		$margin/horizontal/contenedorResultado/resultado.text = capital
 		$margin/horizontal/contenedorNombreCompleto/nombreCompleto.text = str(Globals.json_data_total[pos]["name"]["official"])
-		var informacion = "Region: " + str(Globals.json_data_total[pos]["region"]) + "/" + str(Globals.json_data_total[pos]["subregion"])
+		var informacion = tr("region") + ": " + str(Globals.json_data_total[pos]["region"]) + "/" + str(Globals.json_data_total[pos]["subregion"])
 		#compruebo las monedas
 		var nombreMoneda = ""
 		var simboloMoneda = ""
@@ -98,7 +106,7 @@ func pais_al_azar():
 			nombreMoneda = Globals.json_data_total[pos]["currencies"][tipoMonedas]["name"]
 			simboloMoneda = Globals.json_data_total[pos]["currencies"][tipoMonedas]["symbol"]
 		monedas =  nombreMoneda + "/" + simboloMoneda
-		informacion += "\n" + "Moneda:" + monedas
+		informacion += "\n" + tr("moneda") + monedas
 		#compruebo los idiomas
 		var todosIdiomas = ""
 		var i = 0
@@ -108,8 +116,8 @@ func pais_al_azar():
 			else:
 				todosIdiomas += Globals.json_data_total[pos]["languages"][idiomas] 
 			i += 1
-		informacion += "\n" + "Idiomas: " + todosIdiomas
-		informacion += "\n" + "Fronteras: " + str(Globals.json_data_total[pos]["borders"])
+		informacion += "\n" + tr("idiomas") + ": " + todosIdiomas
+		informacion += "\n" + tr("fronteras") + ": " + str(Globals.json_data_total[pos]["borders"])
 		#informacion += "\n" + "Gentilicio:" + str(Globals.json_data_total[pos]["demonyms"])
 		$margin/horizontal/contenedorInformacion/informacion.text = informacion
 	else:
@@ -122,7 +130,7 @@ func pais_al_azar():
 func _on_Button_pressed():
 	pais_al_azar()
 	activar_botones()
-	$margin/horizontal/margin/marcador.text = str(aciertos) + "/" + str(intentos)
+	$marginMarcador/marcador.text = str(aciertos) + "/" + str(intentos)
 	intentos += 1
 
 
@@ -164,7 +172,7 @@ func _on_opcion4_pressed():
 
 func comprobar_resultado():
 	$margin/horizontal/contenedorResultado.show()
-	$margin/horizontal/siguiente.show()
+	$marginSiguiente/siguiente.show()
 	var estilo = load("res://Art/error.tres")
 	if exito:
 		#$margin/horizontal/contenedorCapital.col
@@ -179,7 +187,7 @@ func comprobar_resultado():
 		#$margin/horizontal/contenedorCapital.get_stylebox("error", "" ).set_bg_color("#d73137")
 		#estilo_respuesta.set_bg_color("#d73137")
 		estilo.set_bg_color("#ED230D")
-	$margin/horizontal/margin/marcador.text = str(aciertos) + "/" + str(intentos)
+	$marginMarcador/marcador.text = str(aciertos) + "/" + str(intentos)
 
 func desactivar_botones():
 	$margin/horizontal/contenedorBotones/grid/opcion1.disabled = true

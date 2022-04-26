@@ -3,7 +3,7 @@
 [ext_resource path="res://Fonts/Montserrat-Bold.ttf" type="DynamicFontData" id=1]
 
 [sub_resource type="DynamicFont" id=5]
-size = 32
+size = 42
 font_data = ExtResource( 1 )
 
 [sub_resource type="StyleBoxFlat" id=1]

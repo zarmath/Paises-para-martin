@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/splash-screen.png-be0d39d8f17c7920c54615e969071b58.stex"
+path="res://.import/number.png-ce34a78764fa47df9f8a35119666cdb7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Imagenes/splash-screen.png"
-dest_files=[ "res://.import/splash-screen.png-be0d39d8f17c7920c54615e969071b58.stex" ]
+source_file="res://publicidad/number.png"
+dest_files=[ "res://.import/number.png-ce34a78764fa47df9f8a35119666cdb7.stex" ]
 
 [params]
 

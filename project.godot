@@ -24,9 +24,9 @@ Globals="*res://Scripts/globals.gd"
 
 [display]
 
-window/size/width=600
-window/size/height=1150
-window/size/test_width=520
+window/size/width=750
+window/size/height=1334
+window/size/test_width=524
 window/size/test_height=1000
 window/handheld/orientation="portrait"
 
@@ -39,5 +39,6 @@ translations=PoolStringArray( "res://traducciones/traduccion paises para martin.
 quality/driver/driver_name="GLES2"
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
+vram_compression/import_pvrtc=true
 environment/default_clear_color=Color( 0.0901961, 0.0823529, 0.333333, 1 )
 environment/default_environment="res://default_env.tres"
