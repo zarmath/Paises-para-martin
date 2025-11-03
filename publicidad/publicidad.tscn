@@ -1,8 +1,8 @@
 [gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://publicidad/publicidad.gd" type="Script" id=1]
-[ext_resource path="res://publicidad/cover.png" type="Texture" id=2]
-[ext_resource path="res://Fonts/Montserrat-Regular.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://publicidad/cover.png" type="Texture2D" id=2]
+[ext_resource path="res://Fonts/Montserrat-Regular.ttf" type="FontFile" id=4]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.8, 0.8, 0.8, 0.392157 )
@@ -19,7 +19,7 @@ corner_radius_bottom_left = 6
 [sub_resource type="Theme" id=2]
 PanelContainer/styles/panel = SubResource( 1 )
 
-[sub_resource type="DynamicFont" id=11]
+[sub_resource type="FontFile" id=11]
 size = 18
 font_data = ExtResource( 4 )
 
@@ -33,8 +33,8 @@ RichTextLabel/constants/line_separation = 1
 RichTextLabel/constants/shadow_as_outline = 0
 RichTextLabel/constants/shadow_offset_x = 1
 RichTextLabel/constants/shadow_offset_y = 1
-RichTextLabel/constants/table_hseparation = 3
-RichTextLabel/constants/table_vseparation = 3
+RichTextLabel/constants/table_h_separation = 3
+RichTextLabel/constants/table_v_separation = 3
 RichTextLabel/fonts/bold_font = null
 RichTextLabel/fonts/bold_italics_font = null
 RichTextLabel/fonts/italics_font = null
@@ -65,47 +65,47 @@ Button/styles/normal = SubResource( 6 )
 script = ExtResource( 1 )
 
 [node name="contenedor" type="MarginContainer" parent="."]
-margin_right = 100.0
-margin_bottom = 60.0
+offset_right = 100.0
+offset_bottom = 60.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="panel" type="PanelContainer" parent="contenedor"]
-margin_right = 105.0
-margin_bottom = 738.0
+offset_right = 105.0
+offset_bottom = 738.0
 theme = SubResource( 2 )
 
 [node name="horizontal" type="HBoxContainer" parent="contenedor"]
-margin_right = 105.0
-margin_bottom = 738.0
-rect_min_size = Vector2( 0, 60 )
+offset_right = 105.0
+offset_bottom = 738.0
+custom_minimum_size = Vector2( 0, 60 )
 
 [node name="marginSprite" type="MarginContainer" parent="contenedor/horizontal"]
-margin_bottom = 738.0
+offset_bottom = 738.0
 
-[node name="miniatura" type="Sprite" parent="contenedor/horizontal/marginSprite"]
+[node name="miniatura" type="Sprite2D" parent="contenedor/horizontal/marginSprite"]
 position = Vector2( 45, 47 )
 texture = ExtResource( 2 )
 
 [node name="margin" type="MarginContainer" parent="contenedor/horizontal"]
-margin_left = 4.0
-margin_right = 105.0
-margin_bottom = 738.0
-custom_constants/margin_top = 13
-custom_constants/margin_left = 100
+offset_left = 4.0
+offset_right = 105.0
+offset_bottom = 738.0
+theme_override_constants/margin_top = 13
+theme_override_constants/margin_left = 100
 
 [node name="explicacion" type="Label" parent="contenedor/horizontal/margin"]
-margin_left = 100.0
-margin_top = 13.0
-margin_right = 101.0
-margin_bottom = 738.0
+offset_left = 100.0
+offset_top = 13.0
+offset_right = 101.0
+offset_bottom = 738.0
 theme = SubResource( 4 )
 text = "Juego de puzzle de ajedrez"
 autowrap = true
 
 [node name="enlaceJuego" type="Button" parent="."]
-margin_right = 12.0
-margin_bottom = 20.0
+offset_right = 12.0
+offset_bottom = 20.0
 theme = SubResource( 7 )
 
 [connection signal="pressed" from="enlaceJuego" to="." method="_on_enlaceJuego_pressed"]

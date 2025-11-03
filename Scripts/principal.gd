@@ -11,32 +11,40 @@ var capitalCorrecta = false
 var capitalError
 var opcion
 
+func _get_capital(entry) -> String:
+	if not (entry is Dictionary):
+		return ""
+	var capital_list = entry.get("capital", [])
+	if capital_list is Array and not capital_list.is_empty():
+		return str(capital_list[0])
+	return ""
+
 func _ready():
 	Globals.leer_json_total("data")
-	VisualServer.set_default_clear_color("171555")
+	RenderingServer.set_default_clear_color(Color("#171555"))
 	intentos = 1
 	aciertos = 0
 	numPaises = Globals.json_data_total.size() - 1
 	#numPaises = 249
 	#tamaños
-	$margin.rect_size.x = Globals.pantallaTamano.x
-	$margin/horizontal.rect_size.x = Globals.pantallaTamano.x
-	$margin/horizontal/container/marginPais.rect_size.x = Globals.pantallaTamano.x - 250
-	$margin/horizontal/contenedorNombreCompleto.rect_size.x = Globals.pantallaTamano.x
-	$marginMarcador.rect_size.x = Globals.pantallaTamano.x
-	$marginSiguiente.rect_size.x = Globals.pantallaTamano.x
-	$marginMarcador.rect_size.y = 70
-	$marginMarcador/panelMarcador.rect_size.y = 70
-	$marginSiguiente.rect_size.y = 70
-	$marginSiguiente.rect_min_size.y = 70
-	$marginSiguiente/siguiente.rect_size.y = 70
-	$marginSiguiente/siguiente.rect_min_size.y = 70
+	$margin.size.x = Globals.pantallaTamano.x
+	$margin/horizontal.size.x = Globals.pantallaTamano.x
+	$margin/horizontal/container/marginPais.size.x = Globals.pantallaTamano.x - 250
+	$margin/horizontal/contenedorNombreCompleto.size.x = Globals.pantallaTamano.x
+	$marginMarcador.size.x = Globals.pantallaTamano.x
+	$marginSiguiente.size.x = Globals.pantallaTamano.x
+	$marginMarcador.size.y = 70
+	$marginMarcador/panelMarcador.size.y = 70
+	$marginSiguiente.size.y = 70
+	$marginSiguiente.custom_minimum_size.y = 70
+	$marginSiguiente/siguiente.size.y = 70
+	$marginSiguiente/siguiente.custom_minimum_size.y = 70
 	#posiciones
 	$publicidad.position.x = Globals.marcoPantalla
 	$publicidad.position.y = Globals.pantallaTamano.y - 110
-	$marginMarcador.rect_position.y = Globals.pantallaTamano.y - 270
-	$marginSiguiente.rect_position.y = Globals.pantallaTamano.y - 200
-	$margin/horizontal/container/marginBandera.rect_min_size.x = 250
+	$marginMarcador.position.y = Globals.pantallaTamano.y - 270
+	$marginSiguiente.position.y = Globals.pantallaTamano.y - 200
+	$margin/horizontal/container/marginBandera.custom_minimum_size.x = 250
 	$marginMarcador/marcador.text = "0/0"
 	pais_al_azar()
 
@@ -49,8 +57,7 @@ func pais_al_azar():
 	#var cantidadPaises = Globals.json_data_total.size()
 	#print(cantidadPaises)
 	var pos = randi() %numPaises +1 
-	capital = str(Globals.json_data_total[pos]["capital"])
-	capital = capital.left(capital.length()-1).right(1)
+	capital = _get_capital(Globals.json_data_total[pos])
 	if capital.length() > 0:
 		var opcionCorrecta = randi() % 4 + 1
 		#busco 3 opciones
@@ -180,13 +187,13 @@ func comprobar_resultado():
 		#$margin/horizontal/contenedorCapital.get_stylebox("error", "" ).set_bg_color("#31d774")
 		#estilo_respuesta.set_bg_color("#31d774")
 		#set(get_node("margin/horizontal/contenedorCapital"),estilo_respuesta)
-		estilo.set_bg_color("#1EB100")
+		estilo.bg_color = Color("#1EB100")
 		aciertos += 1
 	else:
 		$margin/horizontal/contenedorResultado/resultado.text = "ERROR, La capital es: " + capital
 		#$margin/horizontal/contenedorCapital.get_stylebox("error", "" ).set_bg_color("#d73137")
 		#estilo_respuesta.set_bg_color("#d73137")
-		estilo.set_bg_color("#ED230D")
+		estilo.bg_color = Color("#ED230D")
 	$marginMarcador/marcador.text = str(aciertos) + "/" + str(intentos)
 
 func desactivar_botones():
@@ -211,8 +218,7 @@ func comprobar_capital():
 		randomize()
 		opcion = randi() % numPaises + 1
 		#print ("la opción es:",opcion)
-		capitalError = str(Globals.json_data_total[opcion]["capital"])
-		capitalError = capitalError.left(capitalError.length()-1).right(1)
+		capitalError = _get_capital(Globals.json_data_total[opcion])
 		if capitalError.length() > 0:
 			capitalCorrecta = true
 		else:

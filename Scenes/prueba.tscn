@@ -1,9 +1,9 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Fonts/zorque.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Fonts/zorque.ttf" type="FontFile" id=1]
 [ext_resource path="res://Scripts/prueba.gd" type="Script" id=2]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="FontFile" id=1]
 size = 30
 font_data = ExtResource( 1 )
 
@@ -11,22 +11,22 @@ font_data = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="Label" type="Label" parent="."]
-margin_left = 111.0
-margin_top = 60.0
-margin_right = 433.0
-margin_bottom = 97.0
-custom_fonts/font = SubResource( 1 )
+offset_left = 111.0
+offset_top = 60.0
+offset_right = 433.0
+offset_bottom = 97.0
+theme_override_fonts/font = SubResource( 1 )
 text = "ESTO ES UNA PRUEBA"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="prueba" type="Label" parent="."]
-margin_left = 111.0
-margin_top = 127.0
-margin_right = 433.0
-margin_bottom = 168.0
-custom_fonts/font = SubResource( 1 )
+offset_left = 111.0
+offset_top = 127.0
+offset_right = 433.0
+offset_bottom = 168.0
+theme_override_fonts/font = SubResource( 1 )
 text = "ESTO ES UNA PRUEBA"
 __meta__ = {
 "_edit_use_anchors_": false

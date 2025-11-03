@@ -2,7 +2,7 @@ extends Node
 
 var path = "res://Data/listado_paises.json"
 var path_xml = "res://Data/listado_paises.xml"
-var path_local = "user://data.json" 
+var path_local = "user://data.json"
 var json_data
 var json_data_total
 var xml_data
@@ -20,15 +20,16 @@ func _ready():
 
 #con los datos del json data
 func comprobar_si_existe_json():
-	var file = File.new()
-	if file.file_exists(path_local):
+	if FileAccess.file_exists(path_local):
 		print("YES")
-		file.close()
 	else:
 		print("NO")
 		#leo el json data
-		file.open(path_local, File.WRITE)
-		file.store_string(JSON.print(json_data, "  ", true))
+		var file := FileAccess.open(path_local, FileAccess.WRITE)
+		if file == null:
+			push_error("No se ha podido crear el archivo local en %s" % path_local)
+			return
+		file.store_string(JSON.stringify(json_data, "  ", true))
 		file.close()
 
 
@@ -37,11 +38,17 @@ func comprobar_si_existe_json():
 func leer_json():
 	#archivo = "user://" + str(archivo)
 	#print("el archivo a leeer es: ",archivo)
-	var file_read = File.new()
-	file_read.open(path, File.READ)
-	var content =  JSON.parse(file_read.get_as_text())    
+	var file_read := FileAccess.open(path, FileAccess.READ)
+	if file_read == null:
+		push_error("No se ha podido abrir %s" % path)
+		return
+	var test_json_conv := JSON.new()
+	var parse_error := test_json_conv.parse(file_read.get_as_text())
 	file_read.close()
-	json_data = content.result
+	if parse_error != OK:
+		push_error("Error al parsear JSON en %s: %s" % [path, test_json_conv.get_error_message()])
+		return
+	json_data = test_json_conv.data
 
 #creoq eu se puede borrar porque redundante cone l anterior
 func leer_xml():
@@ -54,15 +61,21 @@ func leer_xml():
 
 func leer_json_total(archivo):
 	archivo = "res://Data/" + str(archivo) + ".json"
-	var file_read = File.new()
-	file_read.open(archivo, File.READ)
-	var content =  JSON.parse(file_read.get_as_text())    
+	var file_read := FileAccess.open(archivo, FileAccess.READ)
+	if file_read == null:
+		push_error("No se ha podido abrir %s" % archivo)
+		return
+	var test_json_conv := JSON.new()
+	var parse_error := test_json_conv.parse(file_read.get_as_text())
 	file_read.close()
-	json_data_total = content.result
+	if parse_error != OK:
+		push_error("Error al parsear JSON en %s: %s" % [archivo, test_json_conv.get_error_message()])
+		return
+	json_data_total = test_json_conv.data
 	
 
 func cambiarEscena(nuevaEscena) -> void:
-	var error = get_tree().change_scene(nuevaEscena)
+	var error = get_tree().change_scene_to_file(nuevaEscena)
 	if error != OK:
 		print("no se ha cargado la escena")
 
@@ -72,7 +85,7 @@ func crearTemporizador(tiempo:float) -> void:
 	timer.autostart = true
 	timer.one_shot = false
 	timer.wait_time = tiempo
-	timer.connect("timeout", self, "finalizarTimer")
+	timer.timeout.connect(finalizarTimer)
 	add_child(timer)
 
 

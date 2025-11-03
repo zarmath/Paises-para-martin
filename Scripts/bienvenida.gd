@@ -4,15 +4,15 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	VisualServer.set_default_clear_color(Color(0,0,0,1.0))
+	RenderingServer.set_default_clear_color(Color(0,0,0,1.0))
 	#actualizar_compra_false()
 	#conecto las señales
-	var error = Globals.connect("timerFinalizado",self,"cambiarEscena")
+	var error = Globals.connect("timerFinalizado", Callable(self, "cambiarEscena"))
 	if error != OK:
 		print("no se ha conectado la señal")
 	Globals.pantallaTamano = get_viewport_rect().size
 	Globals.crearTemporizador(1.5)
-	$center.rect_min_size = Globals.pantallaTamano
+	$center.custom_minimum_size = Globals.pantallaTamano
 	
 
 func cambiarEscena() -> void:

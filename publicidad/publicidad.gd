@@ -1,8 +1,8 @@
 extends Node2D
 
 var ordenArray
-onready var miniatura = $contenedor/horizontal/marginSprite/miniatura
-onready var explicacion = $contenedor/horizontal/margin/explicacion
+@onready var miniatura = $contenedor/horizontal/marginSprite/miniatura
+@onready var explicacion = $contenedor/horizontal/margin/explicacion
 var arrayPublicidad = [
 	["res://publicidad/cover.png", "publi_cover","https://apps.apple.com/es/app/cover-of-knight/id1561834977","https://play.google.com/store/apps/details?id=com.garajeimagina.coverknight"],
 	["res://publicidad/krepzen.png", "publi_krepzen","https://apps.apple.com/es/app/krepzen/id1551653313","https://play.google.com/store/apps/details?id=com.garajeimagina.krepzen&hl=es&gl=US"],
@@ -13,13 +13,13 @@ var arrayPublicidad = [
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$contenedor.rect_min_size.x = Globals.pantallaTamano.x - Globals.marcoPantalla*2
-	$contenedor/horizontal.rect_min_size.y = 80
-	$contenedor/panel.rect_min_size.x = Globals.pantallaTamano.x - Globals.marcoPantalla*2
-	$contenedor/horizontal/margin/explicacion.rect_min_size.x = Globals.pantallaTamano.x - 160
-	$contenedor/horizontal/margin/explicacion.rect_min_size.y = 80
-	$enlaceJuego.rect_min_size.x = Globals.pantallaTamano.x
-	$enlaceJuego.rect_min_size.y = 80
+	$contenedor.custom_minimum_size.x = Globals.pantallaTamano.x - Globals.marcoPantalla*2
+	$contenedor/horizontal.custom_minimum_size.y = 80
+	$contenedor/panel.custom_minimum_size.x = Globals.pantallaTamano.x - Globals.marcoPantalla*2
+	$contenedor/horizontal/margin/explicacion.custom_minimum_size.x = Globals.pantallaTamano.x - 160
+	$contenedor/horizontal/margin/explicacion.custom_minimum_size.y = 80
+	$enlaceJuego.custom_minimum_size.x = Globals.pantallaTamano.x
+	$enlaceJuego.custom_minimum_size.y = 80
 	randomize()
 	ordenArray = randi()%(arrayPublicidad.size())+0
 	#actualizo los datos de la publicidad

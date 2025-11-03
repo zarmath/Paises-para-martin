@@ -6,16 +6,13 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
-
-_global_script_classes=[  ]
-_global_script_class_icons={
-}
+config_version=5
 
 [application]
 
 config/name="Paises para Martin"
 run/main_scene="res://Scenes/bienvenida.tscn"
+config/features=PackedStringArray("4.5")
 config/icon="res://Iconos/logo192.png"
 
 [autoload]
@@ -24,21 +21,19 @@ Globals="*res://Scripts/globals.gd"
 
 [display]
 
-window/size/width=750
-window/size/height=1334
-window/size/test_width=524
-window/size/test_height=1000
-window/handheld/orientation="portrait"
+window/size/viewport_width=1080
+window/size/viewport_height=1920
+window/stretch/mode="viewport"
+window/handheld/orientation=1
 
 [locale]
 
-translations=PoolStringArray( "res://traducciones/traduccion paises para martin.en.translation", "res://traducciones/traduccion paises para martin.es.translation" )
+translations=PackedStringArray("res://traducciones/traduccion paises para martin.en.translation", "res://traducciones/traduccion paises para martin.es.translation")
 
 [rendering]
 
+environment/defaults/default_clear_color=Color(0.0901961, 0.0823529, 0.333333, 1)
+environment/defaults/default_environment="res://default_env.tres"
 quality/driver/driver_name="GLES2"
 vram_compression/import_etc=true
-vram_compression/import_etc2=false
 vram_compression/import_pvrtc=true
-environment/default_clear_color=Color( 0.0901961, 0.0823529, 0.333333, 1 )
-environment/default_environment="res://default_env.tres"
