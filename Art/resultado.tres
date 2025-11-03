@@ -1,10 +1,7 @@
-[gd_resource type="Theme" load_steps=3 format=2]
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://du4bvt5o084fk"]
 
-[ext_resource path="res://Fonts/Montserrat-Bold.ttf" type="FontFile" id=1]
-
-[sub_resource type="FontFile" id=1]
-size = 32
-font_data = ExtResource( 1 )
+[ext_resource type="FontFile" uid="uid://d1p1chq00qmoa" path="res://Fonts/Montserrat-Regular.ttf" id="1_eogym"]
 
 [resource]
-Label/fonts/font = SubResource( 1 )
+Label/font_sizes/font_size = 32
+Label/fonts/font = ExtResource("1_eogym")

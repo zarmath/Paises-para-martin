@@ -1,29 +1,33 @@
-[gd_resource type="Theme" load_steps=6 format=2]
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://dfrqada162fjq"]
 
-[ext_resource path="res://Fonts/Montserrat-Bold.ttf" type="FontFile" id=1]
+[ext_resource type="FontFile" uid="uid://d1p1chq00qmoa" path="res://Fonts/Montserrat-Regular.ttf" id="1_v58yj"]
 
-[sub_resource type="FontFile" id=5]
-size = 42
-font_data = ExtResource( 1 )
+[sub_resource type="StyleBoxFlat" id="1"]
+bg_color = Color(0.145098, 0.137255, 0.270588, 1)
 
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.145098, 0.137255, 0.270588, 1 )
+[sub_resource type="StyleBoxFlat" id="2"]
+bg_color = Color(0.0705882, 0.0352941, 0.203922, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+expand_margin_top = 10.0
+expand_margin_bottom = 10.0
 
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.0705882, 0.0352941, 0.203922, 1 )
-
-[sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color( 0.137255, 0.164706, 0.372549, 1 )
+[sub_resource type="StyleBoxFlat" id="3"]
+bg_color = Color(0.137255, 0.164706, 0.372549, 1)
 
 [resource]
-Button/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
-Button/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
-Button/colors/font_color_hover = Color( 0.94, 0.94, 0.94, 1 )
-Button/colors/font_color_pressed = Color( 1, 1, 1, 1 )
+Button/colors/font_color = Color(0.88, 0.88, 0.88, 1)
+Button/colors/font_color_disabled = Color(0.9, 0.9, 0.9, 0.2)
+Button/colors/font_color_hover = Color(0.94, 0.94, 0.94, 1)
+Button/colors/font_color_pressed = Color(1, 1, 1, 1)
 Button/constants/hseparation = 2
-Button/fonts/font = SubResource( 5 )
+Button/font_sizes/font_size = 44
+Button/fonts/font = ExtResource("1_v58yj")
 Button/styles/disabled = null
 Button/styles/focus = null
-Button/styles/hover = SubResource( 1 )
-Button/styles/normal = SubResource( 2 )
-Button/styles/pressed = SubResource( 3 )
+Button/styles/hover = SubResource("1")
+Button/styles/normal = SubResource("2")
+Button/styles/pressed = SubResource("3")

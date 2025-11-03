@@ -39,13 +39,19 @@ func _ready():
 	$marginSiguiente.custom_minimum_size.y = 70
 	$marginSiguiente/siguiente.size.y = 70
 	$marginSiguiente/siguiente.custom_minimum_size.y = 70
+	$margin/horizontal/panelArriba.custom_minimum_size = Vector2(0, 100)
+	$margin/horizontal/panelArriba.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	#posiciones
+	$margin/horizontal/container.alignment = BoxContainer.ALIGNMENT_BEGIN
+	$margin/horizontal/panelArriba.position = Vector2.ZERO
 	$publicidad.position.x = Globals.marcoPantalla
 	$publicidad.position.y = Globals.pantallaTamano.y - 110
-	$marginMarcador.position.y = Globals.pantallaTamano.y - 270
-	$marginSiguiente.position.y = Globals.pantallaTamano.y - 200
+	$marginMarcador.position.y = Globals.pantallaTamano.y - 420
+	$marginSiguiente.position.y = Globals.pantallaTamano.y - 300
 	$margin/horizontal/container/marginBandera.custom_minimum_size.x = 250
 	$marginMarcador/marcador.text = "0/0"
+
+	
 	pais_al_azar()
 
 
@@ -113,7 +119,7 @@ func pais_al_azar():
 			nombreMoneda = Globals.json_data_total[pos]["currencies"][tipoMonedas]["name"]
 			simboloMoneda = Globals.json_data_total[pos]["currencies"][tipoMonedas]["symbol"]
 		monedas =  nombreMoneda + "/" + simboloMoneda
-		informacion += "\n" + tr("moneda") + monedas
+		informacion += "\n" + tr("moneda") + ": " + monedas
 		#compruebo los idiomas
 		var todosIdiomas = ""
 		var i = 0
