@@ -1,7 +1,7 @@
 63f7b34db8d8cdea90c76aacccf841ec
-::res://::1762249414
+::res://::1762274664
 default_env 2.tres::Environment::-1::1762185553::0::1::::<><><>0<>0<><>::
-default_env.tres::Environment::6855617573759120025::1762246178::0::1::::<><><>0<>0<><>::
+default_env.tres::Environment::6855617573759120025::1762251235::0::1::::<><><>0<>0<><>::
 export_presets.cfg::TextFile::-1::1650954061::0::1::::<><><>0<>0<><>::
 icon.png::CompressedTexture2D::6173203664003536658::1617890105::1762185607::1::::<><><>0<>0<>3874919d6a297d6561b537d726efdd2b<>res://.godot/imported/icon.png-487276ed1e3a0c39cad0279d744ee560.ctex::
 logo192.png::CompressedTexture2D::3240204377746976929::1618565255::1762185607::1::::<><><>0<>0<>e705d30e8029a3485021a731aaa60170<>res://.godot/imported/logo192.png-695ec54a433427de917cbe75d0852b81.ctex::
@@ -550,7 +550,7 @@ prueba.tscn::PackedScene::-1::1762185553::0::1::::<><><>0<>0<><>::res://Fonts/zo
 ::res://Scripts/::1762185607
 bienvenida.gd::GDScript::8169264679444888882::1762185553::0::1::::<>Node2D<><>0<>0<><>::
 globals.gd::GDScript::108415782647606511::1762186092::0::1::::<>Node<><>0<>0<><>::
-principal.gd::GDScript::5562071888544731222::1762246166::0::1::::<>Node2D<><>0<>0<><>::
+principal.gd::GDScript::5562071888544731222::1762251232::0::1::::<>Node2D<><>0<>0<><>::
 prueba.gd::GDScript::3274163681521803607::1762185553::0::1::::<>Node2D<><>0<>0<><>::
 ::res://traducciones/::1762185607
 traduccion paises para martin.csv::Translation::7000466280557552545::1650791852::1762185607::1::::<><><>0<>0<>a423d3d8d5d72751354ce18c878912d8<>res://traducciones/traduccion paises para martin.es.translation<*>res://traducciones/traduccion paises para martin.en.translation::

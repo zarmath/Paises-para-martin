@@ -59,7 +59,7 @@ func _get_label_font_size(label: Label, fallback: int) -> int:
 	var detected_size := label.get_theme_font_size("font_size")
 	if detected_size <= 0:
 		return fallback
-	return detected_size
+	return max(detected_size, fallback)
 
 func _fit_label_to_available_width(label: Label, base_size: int, min_size: int, step: int, max_width: float) -> void:
 	if label == null:
@@ -165,6 +165,7 @@ func _ready():
 
 	
 	pais_al_azar()
+	call_deferred("_update_country_labels_layout")
 
 
 func pais_al_azar():
