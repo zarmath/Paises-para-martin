@@ -1,2 +1,12 @@
 res://default_env.tres
+res://Scripts/globals.gd
 res://Scripts/principal.gd
+res://Scenes/principal.tscn
+res://Art/nombre_pais.tres
+res://Art/nombre_capital.tres
+res://Art/informacion.tres
+res://Art/botones_opciones.tres
+res://Art/boton_recargar.tres
+res://Art/marcador.tres
+res://Art/error.tres
+res://Art/resultado.tres

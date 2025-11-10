@@ -1,8 +1,8 @@
-63f7b34db8d8cdea90c76aacccf841ec
-::res://::1762274664
+72322a848ab928aa5c89f0cb78209805
+::res://::1762768967
 default_env 2.tres::Environment::-1::1762185553::0::1::::<><><>0<>0<><>::
-default_env.tres::Environment::6855617573759120025::1762251235::0::1::::<><><>0<>0<><>::
-export_presets.cfg::TextFile::-1::1650954061::0::1::::<><><>0<>0<><>::
+default_env.tres::Environment::6855617573759120025::1762761193::0::1::::<><><>0<>0<><>::
+export_presets.cfg::TextFile::-1::1762764596::0::1::::<><><>0<>0<><>::
 icon.png::CompressedTexture2D::6173203664003536658::1617890105::1762185607::1::::<><><>0<>0<>3874919d6a297d6561b537d726efdd2b<>res://.godot/imported/icon.png-487276ed1e3a0c39cad0279d744ee560.ctex::
 logo192.png::CompressedTexture2D::3240204377746976929::1618565255::1762185607::1::::<><><>0<>0<>e705d30e8029a3485021a731aaa60170<>res://.godot/imported/logo192.png-695ec54a433427de917cbe75d0852b81.ctex::
 README.md::TextFile::-1::1650697604::0::1::::<><><>0<>0<><>::
@@ -16,6 +16,10 @@ nombre_capital.tres::Theme::8853479913411847692::1762245858::0::1::::<><><>0<>0<
 nombre_pais.tres::Theme::4363509182469010384::1762245858::0::1::::<><><>0<>0<><>::uid://2wajxqfofatg::::res://Fonts/Montserrat-Bold.ttf
 panelArriba.tres::Theme::95999778662901090::1762191058::0::1::::<><><>0<>0<><>::
 resultado.tres::Theme::8623005142331073920::1762189403::0::1::::<><><>0<>0<><>::uid://d1p1chq00qmoa::::res://Fonts/Montserrat-Regular.ttf
+::res://assets/::1762761155
+icono.png::CompressedTexture2D::1527912809366217415::1762435205::1762761155::1::::<><><>0<>0<>674c68f88ff4903c6fdaae52e10fa10f<>res://.godot/imported/icono.png-5663c5c0bb5273a0ce7a960a1b001efd.ctex::
+icono_dark.png::CompressedTexture2D::5185426994395703256::1762760558::1762761155::1::::<><><>0<>0<>12f156ba6f571beca424300897bd9dc1<>res://.godot/imported/icono_dark.png-57df58a1d97903b154ab69a4e408b118.ctex::
+icono_tinted.png::CompressedTexture2D::7442032788662108251::1762760673::1762761155::1::::<><><>0<>0<>b71720cb99d937a604c553e7e572abe4<>res://.godot/imported/icono_tinted.png-b386d75c1329343daf60ba704e7e3ba8.ctex::
 ::res://Data/::1762245445
 data.json::JSON::-1::1618072153::0::1::::<><><>0<>0<><>::
 paises_unidos.json::JSON::-1::1762245445::0::1::::<><><>0<>0<><>::
@@ -547,10 +551,10 @@ publicidad.tscn::PackedScene::-1::1762185553::0::1::::<><><>0<>0<><>::res://publ
 bienvenida.tscn::PackedScene::6208642083396926902::1762186326::0::1::::<><><>0<>0<><>::uid://doniuiwobe7ys::::res://Scripts/bienvenida.gd<>uid://ovbnf41v7vpj::::res://Imagenes/splash_screen.png
 principal.tscn::PackedScene::6833270403155475649::1762246175::0::1::::<><><>0<>0<><>::uid://clikrnfdo16ec::::res://Scripts/principal.gd<>uid://b3fymgxcto6bs::::res://Art/nombre_pais.tres<>uid://dyexrx5go0xce::::res://Art/nombre_capital.tres<>uid://cjekwsdkyhdse::::res://Art/informacion.tres<>uid://dfrqada162fjq::::res://Art/botones_opciones.tres<>uid://bb35n723frqve::::res://Art/boton_recargar.tres<>uid://jklxlqnt0tyg::::res://Art/marcador.tres<>res://Art/error.tres<>uid://du4bvt5o084fk::::res://Art/resultado.tres<>res://publicidad/publicidad.tscn
 prueba.tscn::PackedScene::-1::1762185553::0::1::::<><><>0<>0<><>::res://Fonts/zorque.ttf<>res://Scripts/prueba.gd
-::res://Scripts/::1762185607
-bienvenida.gd::GDScript::8169264679444888882::1762185553::0::1::::<>Node2D<><>0<>0<><>::
-globals.gd::GDScript::108415782647606511::1762186092::0::1::::<>Node<><>0<>0<><>::
-principal.gd::GDScript::5562071888544731222::1762251232::0::1::::<>Node2D<><>0<>0<><>::
+::res://Scripts/::1762275242
+bienvenida.gd::GDScript::8169264679444888882::1762764546::0::1::::<>Node2D<><>0<>0<><>::
+globals.gd::GDScript::108415782647606511::1762764543::0::1::::<>Node<><>0<>0<><>::
+principal.gd::GDScript::5562071888544731222::1762275392::0::1::::<>Node2D<><>0<>0<><>::
 prueba.gd::GDScript::3274163681521803607::1762185553::0::1::::<>Node2D<><>0<>0<><>::
 ::res://traducciones/::1762185607
 traduccion paises para martin.csv::Translation::7000466280557552545::1650791852::1762185607::1::::<><><>0<>0<>a423d3d8d5d72751354ce18c878912d8<>res://traducciones/traduccion paises para martin.es.translation<*>res://traducciones/traduccion paises para martin.en.translation::

@@ -13,7 +13,7 @@ config_version=5
 config/name="Paises para Martin"
 run/main_scene="res://Scenes/bienvenida.tscn"
 config/features=PackedStringArray("4.5")
-config/icon="res://Iconos/logo192.png"
+config/icon="uid://v1era4cdikff"
 
 [autoload]
 
@@ -23,7 +23,8 @@ Globals="*res://Scripts/globals.gd"
 
 window/size/viewport_width=1080
 window/size/viewport_height=1920
-window/stretch/mode="viewport"
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 window/handheld/orientation=1
 
 [locale]
@@ -32,6 +33,7 @@ translations=PackedStringArray("res://traducciones/traduccion paises para martin
 
 [rendering]
 
+textures/vram_compression/import_etc2_astc=true
 environment/defaults/default_clear_color=Color(0.0901961, 0.0823529, 0.333333, 1)
 environment/defaults/default_environment="res://default_env.tres"
 quality/driver/driver_name="GLES2"

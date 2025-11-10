@@ -10,7 +10,7 @@ func _ready() -> void:
 	var error = Globals.connect("timerFinalizado", Callable(self, "cambiarEscena"))
 	if error != OK:
 		print("no se ha conectado la señal")
-	Globals.pantallaTamano = get_viewport_rect().size
+	Globals.actualizar_tamano_pantalla(get_viewport())
 	Globals.crearTemporizador(1.5)
 	$center.custom_minimum_size = Globals.pantallaTamano
 	
@@ -23,4 +23,3 @@ func cambiarEscena() -> void:
 	else:
 		Globals.cambiarEscena("res://escenas-principales/juego.tscn")
 	"""
-

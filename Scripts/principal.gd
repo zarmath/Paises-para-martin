@@ -1,31 +1,34 @@
 extends Node2D
 
-var pais_actual = {}
-var paises_array = []
-var numPaises
-var capital
-var exito = false
-var intentos
-var aciertos 
-var estilo_respuesta = StyleBoxFlat.new()
-var capitalCorrecta = false
-var capitalError
-var opcion
-var device_in_spanish = false
+var pais_actual: Dictionary = {}
+var paises_array: Array = []
+var numPaises: int = 0
+var capital: String = ""
+var exito: bool = false
+var intentos: int = 0
+var aciertos: int = 0
+var estilo_respuesta: StyleBoxFlat = StyleBoxFlat.new()
+var capitalCorrecta: bool = false
+var capitalError: String = ""
+var opcion: int = -1
+var device_in_spanish: bool = false
 @onready var _pais_container: PanelContainer = $margin/horizontal/container/marginPais
 @onready var _pais_label: Label = $margin/horizontal/container/marginPais/pais
 @onready var _full_name_container: PanelContainer = $margin/horizontal/contenedorNombreCompleto
 @onready var _full_name_label: Label = $margin/horizontal/contenedorNombreCompleto/nombreCompleto
-var _pais_font_base_size := 53
-var _full_name_font_base_size := 42
+@onready var _option_buttons_panel: PanelContainer = $margin/horizontal/contenedorBotones
+@onready var _option_buttons_grid: VBoxContainer = $margin/horizontal/contenedorBotones/grid
+var _pais_font_base_size: int = 53
+var _full_name_font_base_size: int = 42
 const PAIS_FONT_MIN_SIZE := 26
 const FULL_NAME_FONT_MIN_SIZE := 22
 const FONT_SIZE_STEP := 2
+const OPTION_BUTTONS_WIDTH_RATIO := 0.8
 
 func _format_population(value):
-	var digits := ""
-	var value_type := typeof(value)
-	var is_negative := false
+	var digits: String = ""
+	var value_type: int = typeof(value)
+	var is_negative: bool = false
 	if value_type == TYPE_INT:
 		var int_value: int = value
 		is_negative = int_value < 0
@@ -35,14 +38,14 @@ func _format_population(value):
 		is_negative = float_value < 0.0
 		digits = str(abs(int(float_value)))
 	else:
-		var pop_text := str(value)
+		var pop_text: String = str(value)
 		for char in pop_text:
 			if "0123456789".find(char) != -1:
 				digits += char
 	if digits == "":
 		return str(value)
-	var formatted := ""
-	var count := 0
+	var formatted: String = ""
+	var count: int = 0
 	for i in range(digits.length() - 1, -1, -1):
 		formatted = digits.substr(i, 1) + formatted
 		count += 1
@@ -56,7 +59,7 @@ func _format_population(value):
 func _get_label_font_size(label: Label, fallback: int) -> int:
 	if label == null:
 		return fallback
-	var detected_size := label.get_theme_font_size("font_size")
+	var detected_size: int = label.get_theme_font_size("font_size")
 	if detected_size <= 0:
 		return fallback
 	return max(detected_size, fallback)
@@ -64,17 +67,17 @@ func _get_label_font_size(label: Label, fallback: int) -> int:
 func _fit_label_to_available_width(label: Label, base_size: int, min_size: int, step: int, max_width: float) -> void:
 	if label == null:
 		return
-	var font := label.get_theme_font("font")
+	var font: Font = label.get_theme_font("font")
 	if font == null or max_width <= 0.0:
 		label.add_theme_font_size_override("font_size", base_size)
 		label.reset_size()
 		return
-	var text := label.text.strip_edges()
+	var text: String = label.text.strip_edges()
 	if text == "":
 		label.remove_theme_font_size_override("font_size")
 		label.reset_size()
 		return
-	var font_size := base_size
+	var font_size: int = base_size
 	var safe_min_size: int = max(min_size, 8)
 	while font_size > safe_min_size:
 		var measure: float = font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1.0, font_size).x
@@ -88,12 +91,12 @@ func _fit_label_to_available_width(label: Label, base_size: int, min_size: int, 
 
 func _update_country_labels_layout() -> void:
 	if _pais_label != null and _pais_container != null:
-		var pais_width := _pais_container.size.x
+		var pais_width: float = _pais_container.size.x
 		if pais_width <= 0.0 and Globals.pantallaTamano != null:
 			pais_width = Globals.pantallaTamano.x - 250.0
 		_fit_label_to_available_width(_pais_label, _pais_font_base_size, PAIS_FONT_MIN_SIZE, FONT_SIZE_STEP, pais_width)
 	if _full_name_label != null and _full_name_container != null:
-		var nombre_width := _full_name_container.size.x
+		var nombre_width: float = _full_name_container.size.x
 		if nombre_width <= 0.0 and Globals.pantallaTamano != null:
 			nombre_width = Globals.pantallaTamano.x
 		_fit_label_to_available_width(_full_name_label, _full_name_font_base_size, FULL_NAME_FONT_MIN_SIZE, FONT_SIZE_STEP, nombre_width)
@@ -101,7 +104,7 @@ func _update_country_labels_layout() -> void:
 func _get_capital(entry) -> String:
 	if not (entry is Dictionary):
 		return ""
-	var capital_value = entry.get("capital", [])
+	var capital_value: Variant = entry.get("capital", [])
 	if capital_value is Array and not capital_value.is_empty():
 		return str(capital_value[0])
 	if capital_value is String:
@@ -118,10 +121,10 @@ func _ready():
 		paises_array = []
 	paises_array = paises_array.filter(func(item): return item is Dictionary)
 	numPaises = paises_array.size()
-	var locale_code = OS.get_locale()
+	var locale_code: String = OS.get_locale()
 	if typeof(locale_code) == TYPE_STRING:
 		device_in_spanish = locale_code.to_lower().begins_with("es")
-	RenderingServer.set_default_clear_color(Color("#171555"))
+	Globals.apply_background_color()
 	intentos = 1
 	aciertos = 0
 	#numPaises = 249
@@ -151,6 +154,7 @@ func _ready():
 	$marginSiguiente.position.y = Globals.pantallaTamano.y - 300
 	$margin/horizontal/container/marginBandera.custom_minimum_size.x = 250
 	$marginMarcador/marcador.text = "0/0"
+	_update_option_buttons_width()
 
 	if _pais_label != null:
 		_pais_font_base_size = _get_label_font_size(_pais_label, _pais_font_base_size)
@@ -166,6 +170,12 @@ func _ready():
 	
 	pais_al_azar()
 	call_deferred("_update_country_labels_layout")
+	call_deferred("_update_option_buttons_width")
+
+
+func _notification(what):
+	if what == NOTIFICATION_WM_SIZE_CHANGED:
+		_update_option_buttons_width()
 
 
 func pais_al_azar():
@@ -177,11 +187,11 @@ func pais_al_azar():
 	#print(cantidadPaises)
 	if numPaises == 0:
 		return
-	var pos = randi() % numPaises
+	var pos: int = randi() % numPaises
 	pais_actual = paises_array[pos]
 	capital = _get_capital(pais_actual)
 	if capital.length() > 0:
-		var opcionCorrecta = randi() % 4 + 1
+		var opcionCorrecta: int = randi() % 4 + 1
 		#busco 3 opciones
 		for n in range (1,5):
 			if n == 1:
@@ -209,8 +219,8 @@ func pais_al_azar():
 					comprobar_capital()
 					$margin/horizontal/contenedorBotones/grid/opcion4.text = capitalError
 		#print(capital1,capital2,capital3)
-		var alpha2_code = str(pais_actual.get("alpha2", "")).to_lower()
-		var cadPais = "res://png250px/" + alpha2_code + ".png"
+		var alpha2_code: String = str(pais_actual.get("alpha2", "")).to_lower()
+		var cadPais: String = "res://png250px/" + alpha2_code + ".png"
 		#compruebo la longitud del nombre del pais
 		"""
 		var longitudNombrePais = str(Globals.json_data_total[pos]["translations"]["spa"]["common"]).length()
@@ -237,46 +247,46 @@ func pais_al_azar():
 		else:
 			$margin/horizontal/contenedorNombreCompleto/nombreCompleto.text = str(pais_actual.get("iso_long_name", ""))
 		_update_country_labels_layout()
-		var region_text = str(pais_actual.get("region", ""))
-		var subregion_text = str(pais_actual.get("subregion", ""))
-		var idiomas_info = pais_actual.get("languages_name", [])
-		var idiomas_text = ""
+		var region_text: String = str(pais_actual.get("region", ""))
+		var subregion_text: String = str(pais_actual.get("subregion", ""))
+		var idiomas_info: Variant = pais_actual.get("languages_name", [])
+		var idiomas_text: String = ""
 		if idiomas_info is Array and not idiomas_info.is_empty():
 			idiomas_text = ", ".join(idiomas_info)
 		elif idiomas_info is String:
 			idiomas_text = idiomas_info
-		var region_label = "Región" if device_in_spanish else "Region"
-		var subregion_label = "Subregión" if device_in_spanish else "Subregion"
-		var idiomas_label = "Idiomas" if device_in_spanish else "Languages"
-		var poblacion_label = "Población" if device_in_spanish else "Population"
-		var moneda_label = "Moneda" if device_in_spanish else "Currency"
-		var currencies_info = pais_actual.get("currencies_detail", [])
-		var moneda_text = ""
+		var region_label: String = "Región" if device_in_spanish else "Region"
+		var subregion_label: String = "Subregión" if device_in_spanish else "Subregion"
+		var idiomas_label: String = "Idiomas" if device_in_spanish else "Languages"
+		var poblacion_label: String = "Población" if device_in_spanish else "Population"
+		var moneda_label: String = "Moneda" if device_in_spanish else "Currency"
+		var currencies_info: Variant = pais_actual.get("currencies_detail", [])
+		var moneda_text: String = ""
 		if currencies_info is Array and not currencies_info.is_empty():
-			var moneda_parts = []
+			var moneda_parts: Array[String] = []
 			for moneda in currencies_info:
 				if moneda is Dictionary:
-					var nombre_moneda = str(moneda.get("name", "")).strip_edges()
-					var simbolo_moneda = str(moneda.get("symbol", "")).strip_edges()
-					var moneda_item = nombre_moneda
+					var nombre_moneda: String = str(moneda.get("name", "")).strip_edges()
+					var simbolo_moneda: String = str(moneda.get("symbol", "")).strip_edges()
+					var moneda_item: String = nombre_moneda
 					if simbolo_moneda != "":
 						moneda_item += " (" + simbolo_moneda + ")"
 					if moneda_item.strip_edges() != "":
 						moneda_parts.append(moneda_item)
 			moneda_text = ", ".join(moneda_parts)
 		elif currencies_info is Dictionary:
-			var nombre_moneda_dict = str(currencies_info.get("name", "")).strip_edges()
-			var simbolo_moneda_dict = str(currencies_info.get("symbol", "")).strip_edges()
+			var nombre_moneda_dict: String = str(currencies_info.get("name", "")).strip_edges()
+			var simbolo_moneda_dict: String = str(currencies_info.get("symbol", "")).strip_edges()
 			moneda_text = nombre_moneda_dict
 			if simbolo_moneda_dict != "":
 				moneda_text += " (" + simbolo_moneda_dict + ")"
 		moneda_text = moneda_text.strip_edges()
-		var informacion = region_label + ": " + region_text
+		var informacion: String = region_label + ": " + region_text
 		informacion += "\n" + subregion_label + ": " + subregion_text
 		informacion += "\n" + idiomas_label + ": " + idiomas_text
 		if moneda_text != "":
 			informacion += "\n" + moneda_label + ": " + moneda_text
-			var population_value = _format_population(pais_actual.get("population", ""))
+			var population_value: String = _format_population(pais_actual.get("population", ""))
 			informacion += "\n" + poblacion_label + ": " + population_value
 		#informacion += "\n" + "Gentilicio:" + str(Globals.json_data_total[pos]["demonyms"])
 		$margin/horizontal/contenedorInformacion/informacion.text = informacion
@@ -333,20 +343,20 @@ func _on_opcion4_pressed():
 func comprobar_resultado():
 	$margin/horizontal/contenedorResultado.show()
 	$marginSiguiente/siguiente.show()
-	var estilo = load("res://Art/error.tres")
+	var estilo: StyleBox = load("res://Art/error.tres")
 	if exito:
 		#$margin/horizontal/contenedorCapital.col
-		$margin/horizontal/contenedorResultado/resultado.text = "CORRECTO¡¡¡ La capital es: " + capital
+		$margin/horizontal/contenedorResultado/resultado.text = "CORRECTO¡¡¡\nLa capital es: " + capital
 		#$margin/horizontal/contenedorCapital.get_stylebox("error", "" ).set_bg_color("#31d774")
 		#estilo_respuesta.set_bg_color("#31d774")
 		#set(get_node("margin/horizontal/contenedorCapital"),estilo_respuesta)
-		estilo.bg_color = Color("#1EB100")
+		estilo.bg_color = Color("#1d7b41")
 		aciertos += 1
 	else:
-		$margin/horizontal/contenedorResultado/resultado.text = "ERROR, La capital es: " + capital
+		$margin/horizontal/contenedorResultado/resultado.text = "ERROR¡¡¡\nLa capital es: " + capital
 		#$margin/horizontal/contenedorCapital.get_stylebox("error", "" ).set_bg_color("#d73137")
 		#estilo_respuesta.set_bg_color("#d73137")
-		estilo.bg_color = Color("#ED230D")
+		estilo.bg_color = Color("#a0455c")
 	$marginMarcador/marcador.text = str(aciertos) + "/" + str(intentos)
 
 func desactivar_botones():
@@ -362,6 +372,7 @@ func activar_botones():
 	$margin/horizontal/contenedorBotones/grid/opcion3.disabled = false
 	$margin/horizontal/contenedorBotones/grid/opcion4.disabled = false
 	$margin/horizontal/contenedorBotones.show()
+	_update_option_buttons_width()
 
 func comprobar_capital():
 	capitalCorrecta = false
@@ -373,7 +384,7 @@ func comprobar_capital():
 		randomize()
 		opcion = randi() % numPaises
 		#print ("la opción es:",opcion)
-		var posible_pais = paises_array[opcion]
+		var posible_pais: Dictionary = paises_array[opcion]
 		if posible_pais == pais_actual:
 			continue
 		capitalError = _get_capital(posible_pais)
@@ -383,3 +394,25 @@ func comprobar_capital():
 			capitalCorrecta = false
 	#print("estoy fuera de la comprobación:",capitalCorrecta,"|",capitalError)
 	return(capitalError)
+
+
+func _update_option_buttons_width() -> void:
+	if _option_buttons_panel == null:
+		return
+	var screen_width: float = Globals.pantallaTamano.x
+	if screen_width <= 0.0:
+		screen_width = get_viewport_rect().size.x
+	if screen_width <= 0.0:
+		return
+	var target_width: float = screen_width * OPTION_BUTTONS_WIDTH_RATIO
+	_option_buttons_panel.custom_minimum_size.x = target_width
+	_option_buttons_panel.size.x = target_width
+	_option_buttons_panel.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	if _option_buttons_grid != null:
+		_option_buttons_grid.custom_minimum_size.x = target_width
+		_option_buttons_grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		for button_name in ["opcion1", "opcion2", "opcion3", "opcion4"]:
+			var button: Button = _option_buttons_grid.get_node(button_name)
+			if button != null:
+				button.custom_minimum_size.x = target_width
+				button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
