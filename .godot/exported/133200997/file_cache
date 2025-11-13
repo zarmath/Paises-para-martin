@@ -1,15 +1,15 @@
-res://Art/botones_opciones.tres::2f336ea500cd8d43f60e2d7040908e9f::1762769907::res://.godot/exported/133200997/export-0e918e332d204e6f0ce333672a8d93e3-botones_opciones.res
-res://Art/boton_recargar.tres::e59d4db5dced039b36b4f1f1d11efd92::1762769818::res://.godot/exported/133200997/export-0f56ae1b01d34f2a0103d037bdfc8edc-boton_recargar.res
+res://Art/botones_opciones.tres::6abe84862a50adb608cc345acfe8bd60::1763068203::res://.godot/exported/133200997/export-0e918e332d204e6f0ce333672a8d93e3-botones_opciones.res
+res://Art/boton_recargar.tres::e59d4db5dced039b36b4f1f1d11efd92::1763068144::res://.godot/exported/133200997/export-0f56ae1b01d34f2a0103d037bdfc8edc-boton_recargar.res
 res://Art/error.tres::6aa0d18a09583a9a6a353b9f4981a567::1762770394::res://.godot/exported/133200997/export-8e2ff89763f6ff358890f7c55873cf5d-error.res
-res://Art/informacion.tres::bd010d7b3aef491d3b2a1d213f2a31f5::1762769818::res://.godot/exported/133200997/export-710672c7f04b6cb7d25d490dc99fee39-informacion.res
-res://Art/marcador.tres::96a20fcc26d79030d0f5ea5892830832::1762769818::res://.godot/exported/133200997/export-1dbd9beef6bb703370e0a6ca9f3f8b1a-marcador.res
-res://Art/nombre_capital.tres::62e01c5768565216a136c5d47c714c38::1762769818::res://.godot/exported/133200997/export-1950839b7c63495fd201c741adab9906-nombre_capital.res
-res://Art/nombre_pais.tres::970f938eb2b2563bc30f45f5a8530471::1762769818::res://.godot/exported/133200997/export-087f1e1df075ae09864fa0027336675b-nombre_pais.res
+res://Art/informacion.tres::bd010d7b3aef491d3b2a1d213f2a31f5::1763068144::res://.godot/exported/133200997/export-710672c7f04b6cb7d25d490dc99fee39-informacion.res
+res://Art/marcador.tres::96a20fcc26d79030d0f5ea5892830832::1763068144::res://.godot/exported/133200997/export-1dbd9beef6bb703370e0a6ca9f3f8b1a-marcador.res
+res://Art/nombre_capital.tres::62e01c5768565216a136c5d47c714c38::1763068144::res://.godot/exported/133200997/export-1950839b7c63495fd201c741adab9906-nombre_capital.res
+res://Art/nombre_pais.tres::65dce3604b393a65556d1880224f5db1::1763068144::res://.godot/exported/133200997/export-087f1e1df075ae09864fa0027336675b-nombre_pais.res
 res://Art/panelArriba.tres::020b0de21dc8b97cf5d231b6176358bf::1762191058::res://.godot/exported/133200997/export-af69989340bb78329670db042f46a02f-panelArriba.res
 res://Art/resultado.tres::2eaeb76f3bc2626f9609b15090d931ed::1762770212::res://.godot/exported/133200997/export-e2c949f92a456a40cb46e9c41e5bdd55-resultado.res
 res://publicidad/publicidad.tscn::57020e3e656dea794186d4bdd5444a00::1762185553::res://.godot/exported/133200997/export-d0d9231858d365249bff137dbba34f9a-publicidad.scn
-res://Scenes/bienvenida.tscn::e7ffbb2ab99297af10ac983abee4f80a::1762186326::res://.godot/exported/133200997/export-6abec91780d5f364b86d1cfa3c537290-bienvenida.scn
-res://Scenes/principal.tscn::097269006121dcac32b256574dc9bc9f::1762770394::res://.godot/exported/133200997/export-3d1285dbdbd0404c84ce957ccd75941b-principal.scn
+res://Scenes/bienvenida.tscn::e7ffbb2ab99297af10ac983abee4f80a::1763069192::res://.godot/exported/133200997/export-6abec91780d5f364b86d1cfa3c537290-bienvenida.scn
+res://Scenes/principal.tscn::932b496174d2e63d29d19733212a76f6::1763069656::res://.godot/exported/133200997/export-3d1285dbdbd0404c84ce957ccd75941b-principal.scn
 res://Scenes/prueba.tscn::39a3ba0383e38dd723a2e28201332563::1762185553::res://.godot/exported/133200997/export-85274f10970f07cce8325b4519f6ab1d-prueba.scn
 res://default_env 2.tres::a52129f071fffbd20a6013a6c0edec1e::1762185553::res://.godot/exported/133200997/export-fcec347a04bf665e69f774a99eaad78c-default_env 2.res
-res://default_env.tres::1e121b17fdcd561e23c847cf541f7caa::1762770394::res://.godot/exported/133200997/export-7cf3fd67ad9f55210191d77b582b8209-default_env.res
+res://default_env.tres::1e121b17fdcd561e23c847cf541f7caa::1763070303::res://.godot/exported/133200997/export-7cf3fd67ad9f55210191d77b582b8209-default_env.res

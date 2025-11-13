@@ -11,7 +11,6 @@ var estilo_respuesta: StyleBoxFlat = StyleBoxFlat.new()
 var capitalCorrecta: bool = false
 var capitalError: String = ""
 var opcion: int = -1
-var device_in_spanish: bool = false
 @onready var _pais_container: PanelContainer = $margin/horizontal/container/marginPais
 @onready var _pais_label: Label = $margin/horizontal/container/marginPais/pais
 @onready var _full_name_container: PanelContainer = $margin/horizontal/contenedorNombreCompleto
@@ -111,6 +110,25 @@ func _get_capital(entry) -> String:
 		return capital_value.strip_edges()
 	return ""
 
+func _get_translated_label(key: String, fallback: String) -> String:
+	var translated: String = tr(key)
+	return fallback if translated == key else translated
+
+func _insert_line_break_if_needed(name: String, limit: int = 20) -> String:
+	var trimmed: String = name.strip_edges()
+	if trimmed.length() <= limit:
+		return trimmed
+	var break_index: int = -1
+	for i in range(trimmed.length()):
+		if trimmed[i] == " ":
+			if i >= limit:
+				break_index = i
+				break
+			break_index = i
+	if break_index == -1:
+		break_index = limit
+	return trimmed.substr(0, break_index).strip_edges() + "\n" + trimmed.substr(break_index).strip_edges()
+
 func _ready():
 	Globals.leer_json_total("paises_unidos")
 	if Globals.json_data_total is Dictionary:
@@ -122,8 +140,16 @@ func _ready():
 	paises_array = paises_array.filter(func(item): return item is Dictionary)
 	numPaises = paises_array.size()
 	var locale_code: String = OS.get_locale()
-	if typeof(locale_code) == TYPE_STRING:
-		device_in_spanish = locale_code.to_lower().begins_with("es")
+	if typeof(locale_code) == TYPE_STRING and locale_code != "":
+		var normalized_locale: String = locale_code
+		var underscore_index: int = normalized_locale.find("_")
+		if underscore_index > -1:
+			normalized_locale = normalized_locale.substr(0, underscore_index)
+		var dash_index: int = normalized_locale.find("-")
+		if dash_index > -1:
+			normalized_locale = normalized_locale.substr(0, dash_index)
+		if normalized_locale.strip_edges() != "":
+			TranslationServer.set_locale(normalized_locale.strip_edges())
 	Globals.apply_background_color()
 	intentos = 1
 	aciertos = 0
@@ -152,7 +178,7 @@ func _ready():
 	$publicidad.position.y = Globals.pantallaTamano.y - 110
 	$marginMarcador.position.y = Globals.pantallaTamano.y - 420
 	$marginSiguiente.position.y = Globals.pantallaTamano.y - 300
-	$margin/horizontal/container/marginBandera.custom_minimum_size.x = 250
+	$margin/horizontal/contenedorInformacion/contenidoInformacion/bandera.custom_minimum_size.x = 250
 	$marginMarcador/marcador.text = "0/0"
 	_update_option_buttons_width()
 
@@ -234,13 +260,15 @@ func pais_al_azar():
 		"""
 		#print("el tamaño de la fuente es:",font.size,"|",longitudNombrePais)
 		if alpha2_code != "" and ResourceLoader.exists(cadPais):
-			$margin/horizontal/container/marginBandera/bandera.texture = load(cadPais)
+			$margin/horizontal/contenedorInformacion/contenidoInformacion/bandera.texture = load(cadPais)
 		else:
-			$margin/horizontal/container/marginBandera/bandera.texture = null
+			$margin/horizontal/contenedorInformacion/contenidoInformacion/bandera.texture = null
+		var short_name: String = str(pais_actual.get("iso_short_name", ""))
+		var formatted_short_name: String = _insert_line_break_if_needed(short_name)
 		if _pais_label != null:
-			_pais_label.text = str(pais_actual.get("iso_short_name", ""))
+			_pais_label.text = formatted_short_name
 		else:
-			$margin/horizontal/container/marginPais/pais.text = str(pais_actual.get("iso_short_name", ""))
+			$margin/horizontal/container/marginPais/pais.text = formatted_short_name
 		$margin/horizontal/contenedorResultado/resultado.text = capital
 		if _full_name_label != null:
 			_full_name_label.text = str(pais_actual.get("iso_long_name", ""))
@@ -255,11 +283,11 @@ func pais_al_azar():
 			idiomas_text = ", ".join(idiomas_info)
 		elif idiomas_info is String:
 			idiomas_text = idiomas_info
-		var region_label: String = "Región" if device_in_spanish else "Region"
-		var subregion_label: String = "Subregión" if device_in_spanish else "Subregion"
-		var idiomas_label: String = "Idiomas" if device_in_spanish else "Languages"
-		var poblacion_label: String = "Población" if device_in_spanish else "Population"
-		var moneda_label: String = "Moneda" if device_in_spanish else "Currency"
+		var region_label: String = _get_translated_label("region", "Region")
+		var subregion_label: String = _get_translated_label("subregion", "Subregion")
+		var idiomas_label: String = _get_translated_label("idiomas", "Languages")
+		var poblacion_label: String = _get_translated_label("poblacion", "Population")
+		var moneda_label: String = _get_translated_label("moneda", "Currency")
 		var currencies_info: Variant = pais_actual.get("currencies_detail", [])
 		var moneda_text: String = ""
 		if currencies_info is Array and not currencies_info.is_empty():
@@ -289,7 +317,7 @@ func pais_al_azar():
 			var population_value: String = _format_population(pais_actual.get("population", ""))
 			informacion += "\n" + poblacion_label + ": " + population_value
 		#informacion += "\n" + "Gentilicio:" + str(Globals.json_data_total[pos]["demonyms"])
-		$margin/horizontal/contenedorInformacion/informacion.text = informacion
+		$margin/horizontal/contenedorInformacion/contenidoInformacion/informacion.text = informacion
 	else:
 		pais_al_azar()
 		#pass

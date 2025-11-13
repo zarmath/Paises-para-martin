@@ -22,10 +22,14 @@ Globals="*res://Scripts/globals.gd"
 [display]
 
 window/size/viewport_width=1080
-window/size/viewport_height=1920
+window/size/viewport_height=2340
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 window/handheld/orientation=1
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://traducciones/traduccion paises para martin - Hoja 1.en.translation", "res://traducciones/traduccion paises para martin - Hoja 1.es.translation")
 
 [locale]
 

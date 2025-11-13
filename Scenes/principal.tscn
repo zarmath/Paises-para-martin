@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://c4mc720xxuxbt"]
+[gd_scene load_steps=20 format=3 uid="uid://c4mc720xxuxbt"]
 
 [ext_resource type="Script" uid="uid://clikrnfdo16ec" path="res://Scripts/principal.gd" id="1"]
 [ext_resource type="Theme" uid="uid://b3fymgxcto6bs" path="res://Art/nombre_pais.tres" id="2"]
@@ -21,10 +21,7 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 Panel/styles/panel = SubResource("StyleBoxFlat_e46k6")
 
 [sub_resource type="StyleBoxFlat" id="2"]
-bg_color = Color(0.0901961, 0.0823529, 0.333333, 1)
-
-[sub_resource type="StyleBoxFlat" id="3"]
-content_margin_left = 15.0
+content_margin_bottom = 20.0
 bg_color = Color(0.0901961, 0.0823529, 0.333333, 1)
 
 [sub_resource type="StyleBoxFlat" id="4"]
@@ -93,15 +90,6 @@ layout_mode = 2
 theme = ExtResource("2")
 horizontal_alignment = 1
 
-[node name="marginBandera" type="PanelContainer" parent="margin/horizontal/container"]
-custom_minimum_size = Vector2(250, 150)
-layout_mode = 2
-size_flags_horizontal = 9
-theme_override_styles/panel = SubResource("3")
-
-[node name="bandera" type="TextureRect" parent="margin/horizontal/container/marginBandera"]
-layout_mode = 2
-
 [node name="contenedorNombreCompleto" type="PanelContainer" parent="margin/horizontal"]
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
@@ -165,9 +153,20 @@ horizontal_alignment = 1
 layout_mode = 2
 theme_override_styles/panel = SubResource("6")
 
-[node name="informacion" type="Label" parent="margin/horizontal/contenedorInformacion"]
+[node name="contenidoInformacion" type="HBoxContainer" parent="margin/horizontal/contenedorInformacion"]
 layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 30
+
+[node name="informacion" type="Label" parent="margin/horizontal/contenedorInformacion/contenidoInformacion"]
+layout_mode = 2
+size_flags_horizontal = 3
 theme = ExtResource("4")
+
+[node name="bandera" type="TextureRect" parent="margin/horizontal/contenedorInformacion/contenidoInformacion"]
+custom_minimum_size = Vector2(250, 150)
+layout_mode = 2
+stretch_mode = 3
 
 [node name="marginMarcador" type="MarginContainer" parent="."]
 custom_minimum_size = Vector2(0, 70)
