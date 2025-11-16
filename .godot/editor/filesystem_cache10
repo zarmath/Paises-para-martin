@@ -1,20 +1,21 @@
 72322a848ab928aa5c89f0cb78209805
-::res://::1763275947
+::res://::1763290065
 default_env 2.tres::Environment::-1::1762185553::0::1::::<><><>0<>0<><>::
-default_env.tres::Environment::6855617573759120025::1763070303::0::1::::<><><>0<>0<><>::
+default_env.tres::Environment::6855617573759120025::1763283052::0::1::::<><><>0<>0<><>::
 export_presets.cfg::TextFile::-1::1763070369::0::1::::<><><>0<>0<><>::
 icon.png::CompressedTexture2D::6173203664003536658::1617890105::1762185607::1::::<><><>0<>0<>3874919d6a297d6561b537d726efdd2b<>res://.godot/imported/icon.png-487276ed1e3a0c39cad0279d744ee560.ctex::
 logo192.png::CompressedTexture2D::3240204377746976929::1618565255::1762185607::1::::<><><>0<>0<>e705d30e8029a3485021a731aaa60170<>res://.godot/imported/logo192.png-695ec54a433427de917cbe75d0852b81.ctex::
 README.md::TextFile::-1::1650697604::0::1::::<><><>0<>0<><>::
-::res://Art/::1763068203
-botones_opciones.tres::Theme::7546272321766609886::1763068203::0::1::::<><><>0<>0<><>::uid://d1p1chq00qmoa::::res://Fonts/Montserrat-Regular.ttf
-boton_recargar.tres::Theme::2516258553285049510::1763068144::0::1::::<><><>0<>0<><>::uid://2wajxqfofatg::::res://Fonts/Montserrat-Bold.ttf
+::res://Art/::1763280801
+botones_opciones.tres::Theme::7546272321766609886::1763280801::0::1::::<><><>0<>0<><>::uid://d1p1chq00qmoa::::res://Fonts/Montserrat-Regular.ttf
+boton_recargar.tres::Theme::2516258553285049510::1763280624::0::1::::<><><>0<>0<><>::uid://2wajxqfofatg::::res://Fonts/Montserrat-Bold.ttf
 error.tres::StyleBoxFlat::7186189523817748316::1762770394::0::1::::<><><>0<>0<><>::
-informacion.tres::Theme::5413445879079726380::1763068144::0::1::::<><><>0<>0<><>::uid://d1p1chq00qmoa::::res://Fonts/Montserrat-Regular.ttf
-marcador.tres::Theme::653052933553911450::1763068144::0::1::::<><><>0<>0<><>::uid://2wajxqfofatg::::res://Fonts/Montserrat-Bold.ttf
-nombre_capital.tres::Theme::8853479913411847692::1763068144::0::1::::<><><>0<>0<><>::uid://d1p1chq00qmoa::::res://Fonts/Montserrat-Regular.ttf
-nombre_pais.tres::Theme::4363509182469010384::1763068144::0::1::::<><><>0<>0<><>::uid://2wajxqfofatg::::res://Fonts/Montserrat-Bold.ttf
+informacion.tres::Theme::5413445879079726380::1763280624::0::1::::<><><>0<>0<><>::uid://d1p1chq00qmoa::::res://Fonts/Montserrat-Regular.ttf
+marcador.tres::Theme::653052933553911450::1763280068::0::1::::<><><>0<>0<><>::uid://2wajxqfofatg::::res://Fonts/Montserrat-Bold.ttf
+nombre_capital.tres::Theme::8853479913411847692::1763280624::0::1::::<><><>0<>0<><>::uid://d1p1chq00qmoa::::res://Fonts/Montserrat-Regular.ttf
+nombre_pais.tres::Theme::4363509182469010384::1763280624::0::1::::<><><>0<>0<><>::uid://2wajxqfofatg::::res://Fonts/Montserrat-Bold.ttf
 panelArriba.tres::Theme::95999778662901090::1762191058::0::1::::<><><>0<>0<><>::
+progressbartres.tres::Theme::264731404826120204::1763280213::0::1::::<><><>0<>0<><>::uid://d1p1chq00qmoa::::res://Fonts/Montserrat-Regular.ttf
 resultado.tres::Theme::8623005142331073920::1762770212::0::1::::<><><>0<>0<><>::uid://d1p1chq00qmoa::::res://Fonts/Montserrat-Regular.ttf
 ::res://assets/::1762761155
 icono.png::CompressedTexture2D::1527912809366217415::1762435205::1762761155::1::::<><><>0<>0<>674c68f88ff4903c6fdaae52e10fa10f<>res://.godot/imported/icono.png-5663c5c0bb5273a0ce7a960a1b001efd.ctex::
@@ -28,7 +29,12 @@ ayar.ttf::FontFile::6584211938452426060::1344937070::1762185607::1::::<><><>0<>0
 Montserrat-Bold.ttf::FontFile::1940532393961340468::1323730800::1762185607::1::::<><><>0<>0<>26ef645e7f1a09a9d7f7cba9c1b7f037<>res://.godot/imported/Montserrat-Bold.ttf-89f075aca576be7fc2c4edd1995d6027.fontdata::
 Montserrat-Regular.ttf::FontFile::9016720258929038524::1608619988::1762185607::1::::<><><>0<>0<>80549d18e3a1829eca0a295cc7614bf3<>res://.godot/imported/Montserrat-Regular.ttf-93ee872dd9e789d0c6de3f86a1d6827c.fontdata::
 zorque.ttf::FontFile::6350249285737295435::1608619988::1762185607::1::::<><><>0<>0<>645bbc8dadfce9dee12499c09c0c7e06<>res://.godot/imported/zorque.ttf-898016e593a99dd69269e8b2a5930a26.fontdata::
-::res://Iconos/::1762185607
+::res://Iconos/::1763279332
+icono_idiomas.png::CompressedTexture2D::8792661737624777651::1763279238::1763279332::1::::<><><>0<>0<>939bda355a9fd2adb385f16347d1c8c9<>res://.godot/imported/icono_idiomas.png-ac7421d65216ba39a991cd42d3ff098a.ctex::
+icono_moneda.png::CompressedTexture2D::6583926038629744107::1763279258::1763279332::1::::<><><>0<>0<>83145ab66c17769f330c5332e2e2ca12<>res://.godot/imported/icono_moneda.png-02ad1282d6f94cee49fa698db293e4c8.ctex::
+icono_poblacion.png::CompressedTexture2D::5613345919313116394::1763279289::1763279332::1::::<><><>0<>0<>d7b4104c1606cdd70eeee29a6b2306cb<>res://.godot/imported/icono_poblacion.png-e1c40727f4bc6166e830bfa89e4e8b8a.ctex::
+icono_region.png::CompressedTexture2D::3459355891712900962::1763279309::1763279332::1::::<><><>0<>0<>aaec3ee03fa6a4de8bd50c6773237844<>res://.godot/imported/icono_region.png-99ec7756983f34b9bf9e6ed2465f988b.ctex::
+icono_subregion.png::CompressedTexture2D::9217059835637425956::1763279327::1763279332::1::::<><><>0<>0<>1dbb0d6539d81541fe1b1b58465a721e<>res://.godot/imported/icono_subregion.png-eed8d461e626c441ea2aa47a3e6d5a53.ctex::
 logo76.png::CompressedTexture2D::6407408945554415856::1617967406::1762185607::1::::<><><>0<>0<>c2477323b89a08507901885409d8ca8d<>res://.godot/imported/logo76.png-bc6d48b52a01c41f67b1dcf79694d667.ctex::
 logo120.png::CompressedTexture2D::5101185355188558495::1617967381::1762185607::1::::<><><>0<>0<>6f15aa32f2aa7ee879aed7406db7d9e7<>res://.godot/imported/logo120.png-5d96167b2e68f4ee45b3158d548ac237.ctex::
 logo152.png::CompressedTexture2D::820853131036893670::1617968600::1762185607::1::::<><><>0<>0<>e40e74dab743bf7020cee9ffbf4abec7<>res://.godot/imported/logo152.png-d79d563b20fc0808b38e6a25a6d6ea2a.ctex::
@@ -547,16 +553,16 @@ multiplicatron.png::CompressedTexture2D::4504749640957640276::1647875450::176218
 number.png::CompressedTexture2D::5081934578060808799::1650792207::1762185607::1::::<><><>0<>0<>14f3cadd27b882dd901aa7a9a4eccfc2<>res://.godot/imported/number.png-ce34a78764fa47df9f8a35119666cdb7.ctex::
 publicidad.gd::GDScript::3384409721708684383::1762185553::0::1::::<>Node2D<><>0<>0<><>::
 publicidad.tscn::PackedScene::-1::1762185553::0::1::::<><><>0<>0<><>::res://publicidad/publicidad.gd<>res://publicidad/cover.png<>res://Fonts/Montserrat-Regular.ttf
-::res://Scenes/::1763069192
+::res://Scenes/::1763280875
 bienvenida.tscn::PackedScene::6208642083396926902::1763069192::0::1::::<><><>0<>0<><>::uid://doniuiwobe7ys::::res://Scripts/bienvenida.gd<>uid://ovbnf41v7vpj::::res://Imagenes/splash_screen.png
-principal.tscn::PackedScene::6833270403155475649::1763069656::0::1::::<><><>0<>0<><>::uid://clikrnfdo16ec::::res://Scripts/principal.gd<>uid://b3fymgxcto6bs::::res://Art/nombre_pais.tres<>uid://dyexrx5go0xce::::res://Art/nombre_capital.tres<>uid://cjekwsdkyhdse::::res://Art/informacion.tres<>uid://dfrqada162fjq::::res://Art/botones_opciones.tres<>uid://bb35n723frqve::::res://Art/boton_recargar.tres<>uid://jklxlqnt0tyg::::res://Art/marcador.tres<>uid://danbqyhtcljmi::::res://Art/error.tres<>uid://du4bvt5o084fk::::res://Art/resultado.tres<>res://publicidad/publicidad.tscn
+principal.tscn::PackedScene::6833270403155475649::1763283010::0::1::::<><><>0<>0<><>::uid://clikrnfdo16ec::::res://Scripts/principal.gd<>uid://b3fymgxcto6bs::::res://Art/nombre_pais.tres<>uid://dyexrx5go0xce::::res://Art/nombre_capital.tres<>uid://cjekwsdkyhdse::::res://Art/informacion.tres<>uid://dfrqada162fjq::::res://Art/botones_opciones.tres<>uid://bb35n723frqve::::res://Art/boton_recargar.tres<>uid://danbqyhtcljmi::::res://Art/error.tres<>uid://d1ic8hpidbro::::res://Art/progressbartres.tres<>uid://du4bvt5o084fk::::res://Art/resultado.tres<>res://publicidad/publicidad.tscn
 prueba.tscn::PackedScene::-1::1762185553::0::1::::<><><>0<>0<><>::res://Fonts/zorque.ttf<>res://Scripts/prueba.gd
-::res://Scripts/::1763068453
+::res://Scripts/::1763279857
 bienvenida.gd::GDScript::8169264679444888882::1762764546::0::1::::<>Node2D<><>0<>0<><>::
-globals.gd::GDScript::108415782647606511::1763068556::0::1::::<>Node<><>0<>0<><>::
-principal.gd::GDScript::5562071888544731222::1763070264::0::1::::<>Node2D<><>0<>0<><>::
+globals.gd::GDScript::108415782647606511::1763280429::0::1::::<>Node<><>0<>0<><>::
+principal.gd::GDScript::5562071888544731222::1763283020::0::1::::<>Node2D<><>0<>0<><>::
 prueba.gd::GDScript::3274163681521803607::1762185553::0::1::::<>Node2D<><>0<>0<><>::
-::res://traducciones/::1763069141
-traduccion paises para martin - Hoja 1.csv::Translation::5347656183698801410::1763069095::1763069141::1::::<><><>0<>0<>c2601f2b4b976810357a7b442a43abb3<>res://traducciones/traduccion paises para martin - Hoja 1.es.translation<*>res://traducciones/traduccion paises para martin - Hoja 1.en.translation::
-traduccion paises para martin - Hoja 1.en.translation::OptimizedTranslation::8758520701025349697::1763069141::0::1::::<><><>0<>0<><>::
-traduccion paises para martin - Hoja 1.es.translation::OptimizedTranslation::6544316972992702076::1763069141::0::1::::<><><>0<>0<><>::
+::res://traducciones/::1763277503
+traduccion paises para martin - Hoja 1.csv::Translation::5347656183698801410::1763277121::1763277503::1::::<><><>0<>0<>c2601f2b4b976810357a7b442a43abb3<>res://traducciones/traduccion paises para martin - Hoja 1.es.translation<*>res://traducciones/traduccion paises para martin - Hoja 1.en.translation::
+traduccion paises para martin - Hoja 1.en.translation::OptimizedTranslation::977807187334249321::1763277503::0::1::::<><><>0<>0<><>::
+traduccion paises para martin - Hoja 1.es.translation::OptimizedTranslation::153676099290953952::1763277503::0::1::::<><><>0<>0<><>::

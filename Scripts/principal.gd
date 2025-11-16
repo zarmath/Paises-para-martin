@@ -11,18 +11,221 @@ var estilo_respuesta: StyleBoxFlat = StyleBoxFlat.new()
 var capitalCorrecta: bool = false
 var capitalError: String = ""
 var opcion: int = -1
-@onready var _pais_container: PanelContainer = $margin/horizontal/container/marginPais
-@onready var _pais_label: Label = $margin/horizontal/container/marginPais/pais
-@onready var _full_name_container: PanelContainer = $margin/horizontal/contenedorNombreCompleto
-@onready var _full_name_label: Label = $margin/horizontal/contenedorNombreCompleto/nombreCompleto
+@onready var _header_container: HBoxContainer = $margin/horizontal/contenedorCabecera
+@onready var _pais_container: PanelContainer = $margin/horizontal/contenedorCabecera/contenedorNombres/marginPais
+@onready var _pais_label: Label = $margin/horizontal/contenedorCabecera/contenedorNombres/marginPais/pais
+@onready var _full_name_container: PanelContainer = $margin/horizontal/contenedorCabecera/contenedorNombres/contenedorNombreCompleto
+@onready var _full_name_label: Label = $margin/horizontal/contenedorCabecera/contenedorNombres/contenedorNombreCompleto/nombreCompleto
+@onready var _flag_texture_rect: TextureRect = $margin/horizontal/contenedorCabecera/contenedorBandera/bandera
 @onready var _option_buttons_panel: PanelContainer = $margin/horizontal/contenedorBotones
 @onready var _option_buttons_grid: VBoxContainer = $margin/horizontal/contenedorBotones/grid
+@onready var _info_label_region: Label = $margin/horizontal/contenedorInformacion/contenidoInformacion/filaRegion/etiqueta
+@onready var _info_value_region: Label = $margin/horizontal/contenedorInformacion/contenidoInformacion/filaRegion/valor
+@onready var _info_icon_region: TextureRect = $margin/horizontal/contenedorInformacion/contenidoInformacion/filaRegion/icono
+@onready var _info_label_subregion: Label = $margin/horizontal/contenedorInformacion/contenidoInformacion/filaSubregion/etiqueta
+@onready var _info_value_subregion: Label = $margin/horizontal/contenedorInformacion/contenidoInformacion/filaSubregion/valor
+@onready var _info_icon_subregion: TextureRect = $margin/horizontal/contenedorInformacion/contenidoInformacion/filaSubregion/icono
+@onready var _info_label_moneda: Label = $margin/horizontal/contenedorInformacion/contenidoInformacion/filaMoneda/etiqueta
+@onready var _info_value_moneda: Label = $margin/horizontal/contenedorInformacion/contenidoInformacion/filaMoneda/valor
+@onready var _info_icon_moneda: TextureRect = $margin/horizontal/contenedorInformacion/contenidoInformacion/filaMoneda/icono
+@onready var _info_label_idiomas: Label = $margin/horizontal/contenedorInformacion/contenidoInformacion/filaIdiomas/etiqueta
+@onready var _info_value_idiomas: Label = $margin/horizontal/contenedorInformacion/contenidoInformacion/filaIdiomas/valor
+@onready var _info_icon_idiomas: TextureRect = $margin/horizontal/contenedorInformacion/contenidoInformacion/filaIdiomas/icono
+@onready var _info_label_poblacion: Label = $margin/horizontal/contenedorInformacion/contenidoInformacion/filaPoblacion/etiqueta
+@onready var _info_value_poblacion: Label = $margin/horizontal/contenedorInformacion/contenidoInformacion/filaPoblacion/valor
+@onready var _info_icon_poblacion: TextureRect = $margin/horizontal/contenedorInformacion/contenidoInformacion/filaPoblacion/icono
+@onready var _info_panel: PanelContainer = $margin/horizontal/contenedorInformacion
+@onready var _progress_bar: ProgressBar = $marginMarcador/marcador
+@onready var _result_panel: PanelContainer = $margin/contenedorResultado
+@onready var _result_label: Label = get_node_or_null("margin/contenedorResultado/resultado")
 var _pais_font_base_size: int = 53
 var _full_name_font_base_size: int = 42
 const PAIS_FONT_MIN_SIZE := 26
 const FULL_NAME_FONT_MIN_SIZE := 22
 const FONT_SIZE_STEP := 2
 const OPTION_BUTTONS_WIDTH_RATIO := 0.8
+const INFO_ICON_SIZE := Vector2(18, 18)
+const HEADER_FIXED_HEIGHT := 300.0
+const RESULT_PANEL_HEIGHT_RATIO := 0.65
+const RESULT_PANEL_Y_OFFSET := -40.0
+const ICON_PATH_REGION := "res://Iconos/icono_region.png"
+const ICON_PATH_SUBREGION := "res://Iconos/icono_subregion.png"
+const ICON_PATH_MONEDA := "res://Iconos/icono_moneda.png"
+const ICON_PATH_IDIOMAS := "res://Iconos/icono_idiomas.png"
+const ICON_PATH_POBLACION := "res://Iconos/icono_poblacion.png"
+var _icon_texture_region: Texture2D = null
+var _icon_texture_subregion: Texture2D = null
+var _icon_texture_moneda: Texture2D = null
+var _icon_texture_idiomas: Texture2D = null
+var _icon_texture_poblacion: Texture2D = null
+var _fixed_header_height: float = 0.0
+var _fixed_buttons_height: float = 0.0
+var _fixed_result_height: float = 0.0
+var _fixed_info_height: float = 0.0
+const DEFAULT_HEADER_HEIGHT := 220.0
+const DEFAULT_BUTTONS_HEIGHT := 320.0
+const DEFAULT_RESULT_HEIGHT := 180.0
+const DEFAULT_INFO_HEIGHT := 220.0
+const HEADER_HEIGHT_RATIO := 0.15
+const BUTTONS_HEIGHT_RATIO := 0.25
+const RESULT_HEIGHT_RATIO := 0.18
+const INFO_HEIGHT_RATIO := 0.32
+
+func _update_header_width() -> void:
+	if _header_container == null:
+		return
+	_ensure_fixed_heights()
+	var screen_width: float = Globals.pantallaTamano.x
+	if screen_width <= 0.0:
+		screen_width = get_viewport_rect().size.x
+	if screen_width <= 0.0:
+		return
+	var target_width: float = screen_width * 0.9
+	_header_container.custom_minimum_size.x = target_width
+	_header_container.size.x = target_width
+	_header_container.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	if _fixed_header_height > 0.0:
+		_header_container.custom_minimum_size.y = _fixed_header_height
+		_header_container.size.y = _fixed_header_height
+
+func _update_info_panel_width() -> void:
+	if _info_panel == null:
+		return
+	_ensure_fixed_heights()
+	var screen_width: float = Globals.pantallaTamano.x
+	if screen_width <= 0.0:
+		screen_width = get_viewport_rect().size.x
+	if screen_width <= 0.0:
+		return
+	var target_width: float = screen_width * 0.9
+	_info_panel.custom_minimum_size.x = target_width
+	_info_panel.size.x = target_width
+	_info_panel.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	if _fixed_info_height > 0.0:
+		_info_panel.custom_minimum_size.y = _fixed_info_height
+		_info_panel.size.y = _fixed_info_height
+
+func _update_result_panel_size() -> void:
+	if _result_panel == null:
+		return
+	_ensure_fixed_heights()
+	var screen_width: float = Globals.pantallaTamano.x
+	if screen_width <= 0.0:
+		screen_width = get_viewport_rect().size.x
+	if screen_width <= 0.0:
+		return
+	var target_width: float = 0.0
+	var target_height: float = 0.0
+	if _option_buttons_panel != null:
+		target_width = _option_buttons_panel.size.x
+		if target_width <= 0.0:
+			target_width = _option_buttons_panel.custom_minimum_size.x
+		target_height = _option_buttons_panel.size.y
+		if target_height <= 0.0:
+			target_height = _option_buttons_panel.custom_minimum_size.y
+	if target_width <= 0.0:
+		target_width = screen_width * OPTION_BUTTONS_WIDTH_RATIO
+	if target_height <= 0.0:
+		target_height = _option_buttons_panel.get_combined_minimum_size().y if _option_buttons_panel != null else _result_panel.custom_minimum_size.y
+	target_height *= RESULT_PANEL_HEIGHT_RATIO
+	_result_panel.custom_minimum_size = Vector2(target_width, target_height)
+	_result_panel.size = Vector2(target_width, target_height)
+	_result_panel.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	_result_panel.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	_fixed_result_height = target_height
+	if _option_buttons_panel != null:
+		var target_global_pos: Vector2 = _option_buttons_panel.global_position + Vector2(0, RESULT_PANEL_Y_OFFSET)
+		_result_panel.global_position = target_global_pos
+
+func _ensure_fixed_heights() -> void:
+	if _header_container != null and _fixed_header_height <= 0.0:
+		_fixed_header_height = HEADER_FIXED_HEIGHT
+	if _option_buttons_panel != null and _fixed_buttons_height <= 0.0:
+		var b: float = Globals.pantallaTamano.y * BUTTONS_HEIGHT_RATIO if Globals.pantallaTamano.y > 0.0 else 0.0
+		if b <= 0.0:
+			b = _option_buttons_panel.get_combined_minimum_size().y
+		_fixed_buttons_height = max(b, DEFAULT_BUTTONS_HEIGHT)
+	if _result_panel != null and _fixed_result_height <= 0.0:
+		var r: float = Globals.pantallaTamano.y * RESULT_HEIGHT_RATIO if Globals.pantallaTamano.y > 0.0 else 0.0
+		if r <= 0.0:
+			r = _result_panel.get_combined_minimum_size().y
+		_fixed_result_height = max(r, DEFAULT_RESULT_HEIGHT)
+	if _info_panel != null and _fixed_info_height <= 0.0:
+		var i: float = Globals.pantallaTamano.y * INFO_HEIGHT_RATIO if Globals.pantallaTamano.y > 0.0 else 0.0
+		if i <= 0.0:
+			i = _info_panel.get_combined_minimum_size().y
+		_fixed_info_height = max(i, DEFAULT_INFO_HEIGHT)
+
+func _apply_fixed_heights() -> void:
+	if _header_container != null and _fixed_header_height > 0.0:
+		_header_container.custom_minimum_size.y = _fixed_header_height
+		_header_container.size.y = _fixed_header_height
+	if _option_buttons_panel != null and _fixed_buttons_height > 0.0:
+		_option_buttons_panel.custom_minimum_size.y = _fixed_buttons_height
+		_option_buttons_panel.size.y = _fixed_buttons_height
+	if _option_buttons_grid != null and _fixed_buttons_height > 0.0:
+		_option_buttons_grid.custom_minimum_size.y = _fixed_buttons_height
+		_option_buttons_grid.size.y = _fixed_buttons_height
+		for button_name in ["opcion1", "opcion2", "opcion3", "opcion4"]:
+			var btn: Button = _option_buttons_grid.get_node(button_name)
+			if btn != null:
+				btn.custom_minimum_size.y = _fixed_buttons_height / 4.0
+	if _result_panel != null and _fixed_result_height > 0.0:
+		_result_panel.custom_minimum_size.y = _fixed_result_height
+		_result_panel.size.y = _fixed_result_height
+	if _info_panel != null and _fixed_info_height > 0.0:
+		_info_panel.custom_minimum_size.y = _fixed_info_height
+		_info_panel.size.y = _fixed_info_height
+
+func _reset_result_panel() -> void:
+	if _result_panel == null:
+		return
+	_result_panel.hide()
+	var estilo: StyleBox = load("res://Art/error.tres")
+	if estilo != null:
+		estilo.bg_color = Color("#14162d")
+		_result_panel.add_theme_stylebox_override("panel", estilo)
+	if _result_label != null:
+		_result_label.text = ""
+
+func _update_progress_bar_size() -> void:
+	if _progress_bar == null:
+		return
+	var screen_width: float = Globals.pantallaTamano.x
+	if screen_width <= 0.0:
+		screen_width = get_viewport_rect().size.x
+	if screen_width <= 0.0:
+		return
+	var target_width: float = screen_width * 0.9
+	_progress_bar.custom_minimum_size.x = target_width
+	_progress_bar.size.x = target_width
+	_progress_bar.custom_minimum_size.y = 120.0
+	_progress_bar.size.y = 120.0
+	_progress_bar.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+
+func _apply_info_icon(icon_node: TextureRect, texture: Texture2D) -> void:
+	if icon_node == null:
+		return
+	if INFO_ICON_SIZE.x > 0.0 and INFO_ICON_SIZE.y > 0.0:
+		icon_node.custom_minimum_size = INFO_ICON_SIZE
+		icon_node.size = INFO_ICON_SIZE
+	if texture != null:
+		icon_node.texture = texture
+
+func _set_info_row(label_node: Label, value_node: Label, icon_node: TextureRect, label_text: String, value_text: String, texture: Texture2D) -> void:
+	if label_node != null:
+		label_node.text = label_text + ":"
+	if value_node != null:
+		var clean_value: String = value_text.strip_edges()
+		value_node.text = clean_value if clean_value != "" else "-"
+	_apply_info_icon(icon_node, texture)
+
+func _update_info_labels() -> void:
+	_set_info_row(_info_label_region, _info_value_region, _info_icon_region, _get_translated_label("region", "Region"), "", _icon_texture_region)
+	_set_info_row(_info_label_subregion, _info_value_subregion, _info_icon_subregion, _get_translated_label("subregion", "Subregion"), "", _icon_texture_subregion)
+	_set_info_row(_info_label_moneda, _info_value_moneda, _info_icon_moneda, _get_translated_label("moneda", "Currency"), "", _icon_texture_moneda)
+	_set_info_row(_info_label_idiomas, _info_value_idiomas, _info_icon_idiomas, _get_translated_label("idiomas", "Languages"), "", _icon_texture_idiomas)
+	_set_info_row(_info_label_poblacion, _info_value_poblacion, _info_icon_poblacion, _get_translated_label("poblacion", "Population"), "", _icon_texture_poblacion)
 
 func _format_population(value):
 	var digits: String = ""
@@ -89,15 +292,28 @@ func _fit_label_to_available_width(label: Label, base_size: int, min_size: int, 
 	label.reset_size()
 
 func _update_country_labels_layout() -> void:
+	var header_width: float = 0.0
+	if _header_container != null:
+		header_width = _header_container.size.x
+	if header_width <= 0.0 and Globals.pantallaTamano != null:
+		header_width = Globals.pantallaTamano.x * 0.9
 	if _pais_label != null and _pais_container != null:
 		var pais_width: float = _pais_container.size.x
+		if pais_width <= 0.0:
+			pais_width = _pais_container.custom_minimum_size.x
+		if pais_width <= 0.0 and header_width > 0.0:
+			pais_width = header_width / 3.0
 		if pais_width <= 0.0 and Globals.pantallaTamano != null:
-			pais_width = Globals.pantallaTamano.x - 250.0
+			pais_width = Globals.pantallaTamano.x * 0.5
 		_fit_label_to_available_width(_pais_label, _pais_font_base_size, PAIS_FONT_MIN_SIZE, FONT_SIZE_STEP, pais_width)
 	if _full_name_label != null and _full_name_container != null:
 		var nombre_width: float = _full_name_container.size.x
+		if nombre_width <= 0.0:
+			nombre_width = _full_name_container.custom_minimum_size.x
+		if nombre_width <= 0.0 and header_width > 0.0:
+			nombre_width = header_width * (2.0 / 3.0)
 		if nombre_width <= 0.0 and Globals.pantallaTamano != null:
-			nombre_width = Globals.pantallaTamano.x
+			nombre_width = Globals.pantallaTamano.x * 0.5
 		_fit_label_to_available_width(_full_name_label, _full_name_font_base_size, FULL_NAME_FONT_MIN_SIZE, FONT_SIZE_STEP, nombre_width)
 
 func _get_capital(entry) -> String:
@@ -140,27 +356,35 @@ func _ready():
 	paises_array = paises_array.filter(func(item): return item is Dictionary)
 	numPaises = paises_array.size()
 	var locale_code: String = OS.get_locale()
+	var normalized_locale: String = ""
 	if typeof(locale_code) == TYPE_STRING and locale_code != "":
-		var normalized_locale: String = locale_code
+		normalized_locale = locale_code
 		var underscore_index: int = normalized_locale.find("_")
 		if underscore_index > -1:
 			normalized_locale = normalized_locale.substr(0, underscore_index)
 		var dash_index: int = normalized_locale.find("-")
 		if dash_index > -1:
 			normalized_locale = normalized_locale.substr(0, dash_index)
-		if normalized_locale.strip_edges() != "":
-			TranslationServer.set_locale(normalized_locale.strip_edges())
+	if normalized_locale.strip_edges() != "":
+		TranslationServer.set_locale(normalized_locale.strip_edges())
+	if ResourceLoader.exists(ICON_PATH_REGION):
+		_icon_texture_region = load(ICON_PATH_REGION)
+	if ResourceLoader.exists(ICON_PATH_SUBREGION):
+		_icon_texture_subregion = load(ICON_PATH_SUBREGION)
+	if ResourceLoader.exists(ICON_PATH_MONEDA):
+		_icon_texture_moneda = load(ICON_PATH_MONEDA)
+	if ResourceLoader.exists(ICON_PATH_IDIOMAS):
+		_icon_texture_idiomas = load(ICON_PATH_IDIOMAS)
+	if ResourceLoader.exists(ICON_PATH_POBLACION):
+		_icon_texture_poblacion = load(ICON_PATH_POBLACION)
 	Globals.apply_background_color()
-	intentos = 1
+	intentos = 0
 	aciertos = 0
 	#numPaises = 249
 	#tamaños
 	$margin.size.x = Globals.pantallaTamano.x
 	$margin/horizontal.size.x = Globals.pantallaTamano.x
-	if _pais_container != null:
-		_pais_container.size.x = Globals.pantallaTamano.x - 250
-	if _full_name_container != null:
-		_full_name_container.size.x = Globals.pantallaTamano.x
+	_update_header_width()
 	$marginMarcador.size.x = Globals.pantallaTamano.x
 	$marginSiguiente.size.x = Globals.pantallaTamano.x
 	$marginMarcador.size.y = 70
@@ -172,15 +396,22 @@ func _ready():
 	$margin/horizontal/panelArriba.custom_minimum_size = Vector2(0, 100)
 	$margin/horizontal/panelArriba.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	#posiciones
-	$margin/horizontal/container.alignment = BoxContainer.ALIGNMENT_BEGIN
+	$margin/horizontal/contenedorCabecera.alignment = BoxContainer.ALIGNMENT_BEGIN
 	$margin/horizontal/panelArriba.position = Vector2.ZERO
 	$publicidad.position.x = Globals.marcoPantalla
 	$publicidad.position.y = Globals.pantallaTamano.y - 110
 	$marginMarcador.position.y = Globals.pantallaTamano.y - 420
 	$marginSiguiente.position.y = Globals.pantallaTamano.y - 300
-	$margin/horizontal/contenedorInformacion/contenidoInformacion/bandera.custom_minimum_size.x = 250
-	$marginMarcador/marcador.text = "0/0"
 	_update_option_buttons_width()
+	_update_info_panel_width()
+	_update_progress_bar_size()
+	_update_result_panel_size()
+	_ensure_fixed_heights()
+	_apply_fixed_heights()
+	_update_header_width()
+	_update_option_buttons_width()
+	_update_result_panel_size()
+	_reset_result_panel()
 
 	if _pais_label != null:
 		_pais_font_base_size = _get_label_font_size(_pais_label, _pais_font_base_size)
@@ -192,22 +423,32 @@ func _ready():
 		_full_name_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		_full_name_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		_full_name_label.custom_minimum_size.x = 0
+	_update_info_labels()
 
-	
+
 	pais_al_azar()
 	call_deferred("_update_country_labels_layout")
 	call_deferred("_update_option_buttons_width")
+	call_deferred("_update_score_ui")
 
 
 func _notification(what):
 	if what == NOTIFICATION_WM_SIZE_CHANGED:
+		_update_header_width()
+		_update_option_buttons_width()
+		_update_country_labels_layout()
+		_update_info_panel_width()
+		_update_progress_bar_size()
+		_update_result_panel_size()
+		_apply_fixed_heights()
 		_update_option_buttons_width()
 
 
 func pais_al_azar():
-	#escondo el resultado
-	$margin/horizontal/contenedorResultado.hide()
-	$marginSiguiente/siguiente.hide()
+	_reset_result_panel()
+	$marginSiguiente/siguiente.disabled = true
+	_apply_fixed_heights()
+	_update_result_panel_size()
 	randomize()
 	#var cantidadPaises = Globals.json_data_total.size()
 	#print(cantidadPaises)
@@ -250,7 +491,7 @@ func pais_al_azar():
 		#compruebo la longitud del nombre del pais
 		"""
 		var longitudNombrePais = str(Globals.json_data_total[pos]["translations"]["spa"]["common"]).length()
-		var font = $margin/horizontal/container/margin/pais.get_font("string_name", "")
+		var font = $margin/horizontal/contenedorCabecera/contenedorNombres/marginPais/pais.get_font("string_name", "")
 		if longitudNombrePais < 20:
 			font.size = 60
 		if longitudNombrePais > 19 && longitudNombrePais < 40:
@@ -260,20 +501,21 @@ func pais_al_azar():
 		"""
 		#print("el tamaño de la fuente es:",font.size,"|",longitudNombrePais)
 		if alpha2_code != "" and ResourceLoader.exists(cadPais):
-			$margin/horizontal/contenedorInformacion/contenidoInformacion/bandera.texture = load(cadPais)
+			_flag_texture_rect.texture = load(cadPais)
 		else:
-			$margin/horizontal/contenedorInformacion/contenidoInformacion/bandera.texture = null
+			_flag_texture_rect.texture = null
 		var short_name: String = str(pais_actual.get("iso_short_name", ""))
 		var formatted_short_name: String = _insert_line_break_if_needed(short_name)
 		if _pais_label != null:
 			_pais_label.text = formatted_short_name
 		else:
-			$margin/horizontal/container/marginPais/pais.text = formatted_short_name
-		$margin/horizontal/contenedorResultado/resultado.text = capital
+			$margin/horizontal/contenedorCabecera/contenedorNombres/marginPais/pais.text = formatted_short_name
+		if _result_label != null:
+			_result_label.text = capital
 		if _full_name_label != null:
 			_full_name_label.text = str(pais_actual.get("iso_long_name", ""))
 		else:
-			$margin/horizontal/contenedorNombreCompleto/nombreCompleto.text = str(pais_actual.get("iso_long_name", ""))
+			$margin/horizontal/contenedorCabecera/contenedorNombres/contenedorNombreCompleto/nombreCompleto.text = str(pais_actual.get("iso_long_name", ""))
 		_update_country_labels_layout()
 		var region_text: String = str(pais_actual.get("region", ""))
 		var subregion_text: String = str(pais_actual.get("subregion", ""))
@@ -309,15 +551,16 @@ func pais_al_azar():
 			if simbolo_moneda_dict != "":
 				moneda_text += " (" + simbolo_moneda_dict + ")"
 		moneda_text = moneda_text.strip_edges()
-		var informacion: String = region_label + ": " + region_text
-		informacion += "\n" + subregion_label + ": " + subregion_text
-		informacion += "\n" + idiomas_label + ": " + idiomas_text
-		if moneda_text != "":
-			informacion += "\n" + moneda_label + ": " + moneda_text
-			var population_value: String = _format_population(pais_actual.get("population", ""))
-			informacion += "\n" + poblacion_label + ": " + population_value
-		#informacion += "\n" + "Gentilicio:" + str(Globals.json_data_total[pos]["demonyms"])
-		$margin/horizontal/contenedorInformacion/contenidoInformacion/informacion.text = informacion
+		var population_value: String = _format_population(pais_actual.get("population", ""))
+		_set_info_row(_info_label_region, _info_value_region, _info_icon_region, region_label, region_text, _icon_texture_region)
+		_set_info_row(_info_label_subregion, _info_value_subregion, _info_icon_subregion, subregion_label, subregion_text, _icon_texture_subregion)
+		_set_info_row(_info_label_moneda, _info_value_moneda, _info_icon_moneda, moneda_label, moneda_text, _icon_texture_moneda)
+		_set_info_row(_info_label_idiomas, _info_value_idiomas, _info_icon_idiomas, idiomas_label, idiomas_text, _icon_texture_idiomas)
+		_set_info_row(_info_label_poblacion, _info_value_poblacion, _info_icon_poblacion, poblacion_label, population_value, _icon_texture_poblacion)
+		_update_header_width()
+		_update_info_panel_width()
+		_update_country_labels_layout()
+		_update_option_buttons_width()
 	else:
 		pais_al_azar()
 		#pass
@@ -328,8 +571,17 @@ func pais_al_azar():
 func _on_Button_pressed():
 	pais_al_azar()
 	activar_botones()
-	$marginMarcador/marcador.text = str(aciertos) + "/" + str(intentos)
-	intentos += 1
+	_update_score_ui()
+
+func _update_score_ui() -> void:
+	if _progress_bar == null:
+		return
+	_progress_bar.min_value = 0.0
+	_progress_bar.max_value = 100.0
+	var total: float = float(max(intentos, 1))
+	var percent: float = (float(aciertos) / total) * 100.0
+	_progress_bar.value = clamp(percent, 0.0, 100.0)
+	_progress_bar.tooltip_text = str(aciertos) + "/" + str(intentos)
 
 
 func _on_opcion1_pressed():
@@ -339,7 +591,7 @@ func _on_opcion1_pressed():
 		exito = false
 	comprobar_resultado()
 	desactivar_botones()
-		
+
 
 
 func _on_opcion2_pressed():
@@ -369,37 +621,43 @@ func _on_opcion4_pressed():
 	desactivar_botones()
 
 func comprobar_resultado():
-	$margin/horizontal/contenedorResultado.show()
-	$marginSiguiente/siguiente.show()
+	if _result_panel != null:
+		_result_panel.show()
+	$marginSiguiente/siguiente.disabled = false
+	_update_result_panel_size()
 	var estilo: StyleBox = load("res://Art/error.tres")
 	if exito:
 		#$margin/horizontal/contenedorCapital.col
-		$margin/horizontal/contenedorResultado/resultado.text = "CORRECTO¡¡¡\nLa capital es: " + capital
+		if _result_label != null:
+			_result_label.text = "CORRECTO¡¡¡\nLa capital es: " + capital
 		#$margin/horizontal/contenedorCapital.get_stylebox("error", "" ).set_bg_color("#31d774")
 		#estilo_respuesta.set_bg_color("#31d774")
 		#set(get_node("margin/horizontal/contenedorCapital"),estilo_respuesta)
-		estilo.bg_color = Color("#1d7b41")
+		estilo.bg_color = Color("#2ec27e")
 		aciertos += 1
 	else:
-		$margin/horizontal/contenedorResultado/resultado.text = "ERROR¡¡¡\nLa capital es: " + capital
+		if _result_label != null:
+			_result_label.text = "ERROR¡¡¡\nLa capital es: " + capital
 		#$margin/horizontal/contenedorCapital.get_stylebox("error", "" ).set_bg_color("#d73137")
 		#estilo_respuesta.set_bg_color("#d73137")
-		estilo.bg_color = Color("#a0455c")
-	$marginMarcador/marcador.text = str(aciertos) + "/" + str(intentos)
+		estilo.bg_color = Color("#d35f5f")
+	intentos += 1
+	_update_score_ui()
 
 func desactivar_botones():
 	$margin/horizontal/contenedorBotones/grid/opcion1.disabled = true
 	$margin/horizontal/contenedorBotones/grid/opcion2.disabled = true
 	$margin/horizontal/contenedorBotones/grid/opcion3.disabled = true
 	$margin/horizontal/contenedorBotones/grid/opcion4.disabled = true
-	$margin/horizontal/contenedorBotones.hide()
+	_apply_fixed_heights()
 
 func activar_botones():
 	$margin/horizontal/contenedorBotones/grid/opcion1.disabled = false
 	$margin/horizontal/contenedorBotones/grid/opcion2.disabled = false
 	$margin/horizontal/contenedorBotones/grid/opcion3.disabled = false
 	$margin/horizontal/contenedorBotones/grid/opcion4.disabled = false
-	$margin/horizontal/contenedorBotones.show()
+	if _option_buttons_grid != null:
+		_option_buttons_grid.visible = true
 	_update_option_buttons_width()
 
 func comprobar_capital():
@@ -427,6 +685,7 @@ func comprobar_capital():
 func _update_option_buttons_width() -> void:
 	if _option_buttons_panel == null:
 		return
+	_ensure_fixed_heights()
 	var screen_width: float = Globals.pantallaTamano.x
 	if screen_width <= 0.0:
 		screen_width = get_viewport_rect().size.x
@@ -436,11 +695,20 @@ func _update_option_buttons_width() -> void:
 	_option_buttons_panel.custom_minimum_size.x = target_width
 	_option_buttons_panel.size.x = target_width
 	_option_buttons_panel.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	if _fixed_buttons_height > 0.0:
+		_option_buttons_panel.custom_minimum_size.y = _fixed_buttons_height
+		_option_buttons_panel.size.y = _fixed_buttons_height
 	if _option_buttons_grid != null:
 		_option_buttons_grid.custom_minimum_size.x = target_width
 		_option_buttons_grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		if _fixed_buttons_height > 0.0:
+			_option_buttons_grid.custom_minimum_size.y = _fixed_buttons_height
+			_option_buttons_grid.size.y = _fixed_buttons_height
 		for button_name in ["opcion1", "opcion2", "opcion3", "opcion4"]:
 			var button: Button = _option_buttons_grid.get_node(button_name)
 			if button != null:
 				button.custom_minimum_size.x = target_width
 				button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+				if _fixed_buttons_height > 0.0:
+					button.custom_minimum_size.y = _fixed_buttons_height / 4.0
+	_update_result_panel_size()

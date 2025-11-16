@@ -8,7 +8,7 @@ var json_data_total: Variant = null
 var xml_data: Variant = null
 var pantallaTamano: Vector2 = Vector2.ZERO
 var marcoPantalla: int = 0
-var background_color: Color = Color("#171555")
+var background_color: Color = Color("#121833")
 signal timerFinalizado
 
 func _ready():

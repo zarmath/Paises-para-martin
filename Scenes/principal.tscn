@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://c4mc720xxuxbt"]
+[gd_scene load_steps=19 format=3 uid="uid://c4mc720xxuxbt"]
 
 [ext_resource type="Script" uid="uid://clikrnfdo16ec" path="res://Scripts/principal.gd" id="1"]
 [ext_resource type="Theme" uid="uid://b3fymgxcto6bs" path="res://Art/nombre_pais.tres" id="2"]
@@ -6,13 +6,10 @@
 [ext_resource type="Theme" uid="uid://cjekwsdkyhdse" path="res://Art/informacion.tres" id="4"]
 [ext_resource type="Theme" uid="uid://dfrqada162fjq" path="res://Art/botones_opciones.tres" id="5"]
 [ext_resource type="Theme" uid="uid://bb35n723frqve" path="res://Art/boton_recargar.tres" id="6"]
-[ext_resource type="Theme" uid="uid://jklxlqnt0tyg" path="res://Art/marcador.tres" id="7"]
 [ext_resource type="StyleBox" uid="uid://danbqyhtcljmi" path="res://Art/error.tres" id="8"]
+[ext_resource type="Theme" uid="uid://d1ic8hpidbro" path="res://Art/progressbartres.tres" id="8_e46k6"]
 [ext_resource type="Theme" uid="uid://du4bvt5o084fk" path="res://Art/resultado.tres" id="9"]
 [ext_resource type="PackedScene" path="res://publicidad/publicidad.tscn" id="10"]
-
-[sub_resource type="StyleBoxFlat" id="1"]
-bg_color = Color(0.0901961, 0.0823529, 0.333333, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e46k6"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -22,13 +19,13 @@ Panel/styles/panel = SubResource("StyleBoxFlat_e46k6")
 
 [sub_resource type="StyleBoxFlat" id="2"]
 content_margin_bottom = 20.0
-bg_color = Color(0.0901961, 0.0823529, 0.333333, 1)
+bg_color = Color(0.09019608, 0.08235294, 0.33333334, 0)
 
 [sub_resource type="StyleBoxFlat" id="4"]
 content_margin_left = 11.0
 content_margin_top = 30.0
 content_margin_bottom = 30.0
-bg_color = Color(0.168627, 0.160784, 0.380392, 1)
+bg_color = Color(0.09019608, 0.08235294, 0.33333334, 0)
 border_color = Color(0.8, 0.8, 0.8, 0)
 
 [sub_resource type="StyleBoxFlat" id="5"]
@@ -40,7 +37,7 @@ content_margin_left = 15.0
 content_margin_top = 100.0
 content_margin_right = 15.0
 content_margin_bottom = 15.0
-bg_color = Color(0.0901961, 0.0823529, 0.333333, 1)
+bg_color = Color(0.09019608, 0.08235294, 0.33333334, 0)
 expand_margin_bottom = 4.0
 
 [sub_resource type="StyleBoxFlat" id="10"]
@@ -49,6 +46,7 @@ border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
+border_color = Color(0.1254902, 0.16470589, 0.32156864, 1)
 corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
@@ -65,10 +63,29 @@ script = ExtResource("1")
 [node name="margin" type="PanelContainer" parent="."]
 offset_right = 604.0
 offset_bottom = 1227.0
-theme_override_styles/panel = SubResource("1")
+theme_override_styles/panel = SubResource("StyleBoxFlat_e46k6")
 
 [node name="horizontal" type="VBoxContainer" parent="margin"]
 layout_mode = 2
+
+[node name="contenedorResultado" type="PanelContainer" parent="margin"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 1
+anchor_left = 0.1
+anchor_top = 0.3
+anchor_right = 0.9
+anchor_bottom = 0.3
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+theme_override_styles/panel = ExtResource("8")
+z_index = 10
+
+[node name="resultado" type="Label" parent="margin/contenedorResultado"]
+layout_mode = 2
+theme = ExtResource("9")
+horizontal_alignment = 1
 
 [node name="panelArriba" type="Panel" parent="margin/horizontal"]
 custom_minimum_size = Vector2(0, 100)
@@ -76,27 +93,54 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme = SubResource("Theme_1d07u")
 
-[node name="container" type="HBoxContainer" parent="margin/horizontal"]
-layout_mode = 2
-alignment = 1
-
-[node name="marginPais" type="PanelContainer" parent="margin/horizontal/container"]
+[node name="contenedorCabecera" type="HBoxContainer" parent="margin/horizontal"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 30
+
+[node name="contenedorBandera" type="PanelContainer" parent="margin/horizontal/contenedorCabecera"]
+custom_minimum_size = Vector2(250, 150)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_styles/panel = SubResource("2")
 
-[node name="pais" type="Label" parent="margin/horizontal/container/marginPais"]
+[node name="bandera" type="TextureRect" parent="margin/horizontal/contenedorCabecera/contenedorBandera"]
+custom_minimum_size = Vector2(250, 150)
 layout_mode = 2
+stretch_mode = 3
+
+[node name="contenedorNombres" type="VBoxContainer" parent="margin/horizontal/contenedorCabecera"]
+custom_minimum_size = Vector2(250, 150)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+theme_override_constants/separation = 10
+
+[node name="marginPais" type="PanelContainer" parent="margin/horizontal/contenedorCabecera/contenedorNombres"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("2")
+
+[node name="pais" type="Label" parent="margin/horizontal/contenedorCabecera/contenedorNombres/marginPais"]
+layout_mode = 2
+size_flags_vertical = 3
 theme = ExtResource("2")
 horizontal_alignment = 1
 
-[node name="contenedorNombreCompleto" type="PanelContainer" parent="margin/horizontal"]
+[node name="contenedorNombreCompleto" type="PanelContainer" parent="margin/horizontal/contenedorCabecera/contenedorNombres"]
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_styles/panel = SubResource("4")
 
-[node name="nombreCompleto" type="Label" parent="margin/horizontal/contenedorNombreCompleto"]
+[node name="nombreCompleto" type="Label" parent="margin/horizontal/contenedorCabecera/contenedorNombres/contenedorNombreCompleto"]
 layout_mode = 2
+size_flags_vertical = 3
 theme = ExtResource("3")
 horizontal_alignment = 1
 
@@ -138,35 +182,109 @@ size_flags_horizontal = 3
 theme = ExtResource("5")
 clip_text = true
 
-[node name="contenedorResultado" type="PanelContainer" parent="margin/horizontal"]
-custom_minimum_size = Vector2(0, 150)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = ExtResource("8")
-
-[node name="resultado" type="Label" parent="margin/horizontal/contenedorResultado"]
-layout_mode = 2
-theme = ExtResource("9")
-horizontal_alignment = 1
-
 [node name="contenedorInformacion" type="PanelContainer" parent="margin/horizontal"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("6")
 
-[node name="contenidoInformacion" type="HBoxContainer" parent="margin/horizontal/contenedorInformacion"]
+[node name="contenidoInformacion" type="VBoxContainer" parent="margin/horizontal/contenedorInformacion"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 30
+theme_override_constants/separation = 12
 
-[node name="informacion" type="Label" parent="margin/horizontal/contenedorInformacion/contenidoInformacion"]
+[node name="filaRegion" type="HBoxContainer" parent="margin/horizontal/contenedorInformacion/contenidoInformacion"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="icono" type="TextureRect" parent="margin/horizontal/contenedorInformacion/contenidoInformacion/filaRegion"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+stretch_mode = 3
+
+[node name="etiqueta" type="Label" parent="margin/horizontal/contenedorInformacion/contenidoInformacion/filaRegion"]
+layout_mode = 2
+theme = ExtResource("4")
+
+[node name="valor" type="Label" parent="margin/horizontal/contenedorInformacion/contenidoInformacion/filaRegion"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4")
 
-[node name="bandera" type="TextureRect" parent="margin/horizontal/contenedorInformacion/contenidoInformacion"]
-custom_minimum_size = Vector2(250, 150)
+[node name="filaSubregion" type="HBoxContainer" parent="margin/horizontal/contenedorInformacion/contenidoInformacion"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="icono" type="TextureRect" parent="margin/horizontal/contenedorInformacion/contenidoInformacion/filaSubregion"]
+custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 stretch_mode = 3
+
+[node name="etiqueta" type="Label" parent="margin/horizontal/contenedorInformacion/contenidoInformacion/filaSubregion"]
+layout_mode = 2
+theme = ExtResource("4")
+
+[node name="valor" type="Label" parent="margin/horizontal/contenedorInformacion/contenidoInformacion/filaSubregion"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("4")
+
+[node name="filaMoneda" type="HBoxContainer" parent="margin/horizontal/contenedorInformacion/contenidoInformacion"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="icono" type="TextureRect" parent="margin/horizontal/contenedorInformacion/contenidoInformacion/filaMoneda"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+stretch_mode = 3
+
+[node name="etiqueta" type="Label" parent="margin/horizontal/contenedorInformacion/contenidoInformacion/filaMoneda"]
+layout_mode = 2
+theme = ExtResource("4")
+
+[node name="valor" type="Label" parent="margin/horizontal/contenedorInformacion/contenidoInformacion/filaMoneda"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("4")
+
+[node name="filaIdiomas" type="HBoxContainer" parent="margin/horizontal/contenedorInformacion/contenidoInformacion"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="icono" type="TextureRect" parent="margin/horizontal/contenedorInformacion/contenidoInformacion/filaIdiomas"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+stretch_mode = 3
+
+[node name="etiqueta" type="Label" parent="margin/horizontal/contenedorInformacion/contenidoInformacion/filaIdiomas"]
+layout_mode = 2
+theme = ExtResource("4")
+
+[node name="valor" type="Label" parent="margin/horizontal/contenedorInformacion/contenidoInformacion/filaIdiomas"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("4")
+
+[node name="filaPoblacion" type="HBoxContainer" parent="margin/horizontal/contenedorInformacion/contenidoInformacion"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="icono" type="TextureRect" parent="margin/horizontal/contenedorInformacion/contenidoInformacion/filaPoblacion"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+stretch_mode = 3
+
+[node name="etiqueta" type="Label" parent="margin/horizontal/contenedorInformacion/contenidoInformacion/filaPoblacion"]
+layout_mode = 2
+theme = ExtResource("4")
+
+[node name="valor" type="Label" parent="margin/horizontal/contenedorInformacion/contenidoInformacion/filaPoblacion"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("4")
 
 [node name="marginMarcador" type="MarginContainer" parent="."]
 custom_minimum_size = Vector2(0, 70)
@@ -181,10 +299,10 @@ custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 theme = SubResource("11")
 
-[node name="marcador" type="Label" parent="marginMarcador"]
+[node name="marcador" type="ProgressBar" parent="marginMarcador"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-theme = ExtResource("7")
-horizontal_alignment = 1
+theme = ExtResource("8_e46k6")
 
 [node name="marginSiguiente" type="MarginContainer" parent="."]
 custom_minimum_size = Vector2(0, 70)
