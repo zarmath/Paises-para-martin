@@ -1,8 +1,8 @@
 72322a848ab928aa5c89f0cb78209805
-::res://::1763068910
+::res://::1763275947
 default_env 2.tres::Environment::-1::1762185553::0::1::::<><><>0<>0<><>::
-default_env.tres::Environment::6855617573759120025::1763068910::0::1::::<><><>0<>0<><>::
-export_presets.cfg::TextFile::-1::1762770442::0::1::::<><><>0<>0<><>::
+default_env.tres::Environment::6855617573759120025::1763070303::0::1::::<><><>0<>0<><>::
+export_presets.cfg::TextFile::-1::1763070369::0::1::::<><><>0<>0<><>::
 icon.png::CompressedTexture2D::6173203664003536658::1617890105::1762185607::1::::<><><>0<>0<>3874919d6a297d6561b537d726efdd2b<>res://.godot/imported/icon.png-487276ed1e3a0c39cad0279d744ee560.ctex::
 logo192.png::CompressedTexture2D::3240204377746976929::1618565255::1762185607::1::::<><><>0<>0<>e705d30e8029a3485021a731aaa60170<>res://.godot/imported/logo192.png-695ec54a433427de917cbe75d0852b81.ctex::
 README.md::TextFile::-1::1650697604::0::1::::<><><>0<>0<><>::
@@ -547,16 +547,16 @@ multiplicatron.png::CompressedTexture2D::4504749640957640276::1647875450::176218
 number.png::CompressedTexture2D::5081934578060808799::1650792207::1762185607::1::::<><><>0<>0<>14f3cadd27b882dd901aa7a9a4eccfc2<>res://.godot/imported/number.png-ce34a78764fa47df9f8a35119666cdb7.ctex::
 publicidad.gd::GDScript::3384409721708684383::1762185553::0::1::::<>Node2D<><>0<>0<><>::
 publicidad.tscn::PackedScene::-1::1762185553::0::1::::<><><>0<>0<><>::res://publicidad/publicidad.gd<>res://publicidad/cover.png<>res://Fonts/Montserrat-Regular.ttf
-::res://Scenes/::1763068908
-bienvenida.tscn::PackedScene::6208642083396926902::1763068908::0::1::::<><><>0<>0<><>::uid://doniuiwobe7ys::::res://Scripts/bienvenida.gd<>uid://ovbnf41v7vpj::::res://Imagenes/splash_screen.png
-principal.tscn::PackedScene::6833270403155475649::1763068787::0::1::::<><><>0<>0<><>::uid://clikrnfdo16ec::::res://Scripts/principal.gd<>uid://b3fymgxcto6bs::::res://Art/nombre_pais.tres<>uid://dyexrx5go0xce::::res://Art/nombre_capital.tres<>uid://cjekwsdkyhdse::::res://Art/informacion.tres<>uid://dfrqada162fjq::::res://Art/botones_opciones.tres<>uid://bb35n723frqve::::res://Art/boton_recargar.tres<>uid://jklxlqnt0tyg::::res://Art/marcador.tres<>uid://danbqyhtcljmi::::res://Art/error.tres<>uid://du4bvt5o084fk::::res://Art/resultado.tres<>res://publicidad/publicidad.tscn
+::res://Scenes/::1763069192
+bienvenida.tscn::PackedScene::6208642083396926902::1763069192::0::1::::<><><>0<>0<><>::uid://doniuiwobe7ys::::res://Scripts/bienvenida.gd<>uid://ovbnf41v7vpj::::res://Imagenes/splash_screen.png
+principal.tscn::PackedScene::6833270403155475649::1763069656::0::1::::<><><>0<>0<><>::uid://clikrnfdo16ec::::res://Scripts/principal.gd<>uid://b3fymgxcto6bs::::res://Art/nombre_pais.tres<>uid://dyexrx5go0xce::::res://Art/nombre_capital.tres<>uid://cjekwsdkyhdse::::res://Art/informacion.tres<>uid://dfrqada162fjq::::res://Art/botones_opciones.tres<>uid://bb35n723frqve::::res://Art/boton_recargar.tres<>uid://jklxlqnt0tyg::::res://Art/marcador.tres<>uid://danbqyhtcljmi::::res://Art/error.tres<>uid://du4bvt5o084fk::::res://Art/resultado.tres<>res://publicidad/publicidad.tscn
 prueba.tscn::PackedScene::-1::1762185553::0::1::::<><><>0<>0<><>::res://Fonts/zorque.ttf<>res://Scripts/prueba.gd
 ::res://Scripts/::1763068453
 bienvenida.gd::GDScript::8169264679444888882::1762764546::0::1::::<>Node2D<><>0<>0<><>::
 globals.gd::GDScript::108415782647606511::1763068556::0::1::::<>Node<><>0<>0<><>::
-principal.gd::GDScript::5562071888544731222::1763068850::0::1::::<>Node2D<><>0<>0<><>::
+principal.gd::GDScript::5562071888544731222::1763070264::0::1::::<>Node2D<><>0<>0<><>::
 prueba.gd::GDScript::3274163681521803607::1762185553::0::1::::<>Node2D<><>0<>0<><>::
-::res://traducciones/::1763069139
+::res://traducciones/::1763069141
+traduccion paises para martin - Hoja 1.csv::Translation::5347656183698801410::1763069095::1763069141::1::::<><><>0<>0<>c2601f2b4b976810357a7b442a43abb3<>res://traducciones/traduccion paises para martin - Hoja 1.es.translation<*>res://traducciones/traduccion paises para martin - Hoja 1.en.translation::
 traduccion paises para martin - Hoja 1.en.translation::OptimizedTranslation::8758520701025349697::1763069141::0::1::::<><><>0<>0<><>::
 traduccion paises para martin - Hoja 1.es.translation::OptimizedTranslation::6544316972992702076::1763069141::0::1::::<><><>0<>0<><>::
-traduccion paises para martin - Hoja 1.csv::Translation::5347656183698801410::1763069095::1763069141::1::::<><><>0<>0<>c2601f2b4b976810357a7b442a43abb3<>res://traducciones/traduccion paises para martin - Hoja 1.es.translation<*>res://traducciones/traduccion paises para martin - Hoja 1.en.translation::
