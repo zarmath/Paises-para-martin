@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://c4mc720xxuxbt"]
+[gd_scene load_steps=20 format=3 uid="uid://c4mc720xxuxbt"]
 
 [ext_resource type="Script" uid="uid://clikrnfdo16ec" path="res://Scripts/principal.gd" id="1"]
 [ext_resource type="Theme" uid="uid://b3fymgxcto6bs" path="res://Art/nombre_pais.tres" id="2"]
@@ -10,6 +10,7 @@
 [ext_resource type="Theme" uid="uid://d1ic8hpidbro" path="res://Art/progressbartres.tres" id="8_e46k6"]
 [ext_resource type="Theme" uid="uid://du4bvt5o084fk" path="res://Art/resultado.tres" id="9"]
 [ext_resource type="PackedScene" path="res://publicidad/publicidad.tscn" id="10"]
+[ext_resource type="Theme" uid="uid://b3qf8omoba487" path="res://Art/boton_otros.tres" id="10_1d07u"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e46k6"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -42,10 +43,6 @@ expand_margin_bottom = 4.0
 
 [sub_resource type="StyleBoxFlat" id="10"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
 border_color = Color(0.1254902, 0.16470589, 0.32156864, 1)
 corner_radius_top_left = 12
 corner_radius_top_right = 12
@@ -61,31 +58,14 @@ Panel/styles/panel = SubResource("10")
 script = ExtResource("1")
 
 [node name="margin" type="PanelContainer" parent="."]
-offset_right = 604.0
-offset_bottom = 1227.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_e46k6")
 
 [node name="horizontal" type="VBoxContainer" parent="margin"]
 layout_mode = 2
-
-[node name="contenedorResultado" type="PanelContainer" parent="margin"]
-custom_minimum_size = Vector2(0, 150)
-layout_mode = 1
-anchor_left = 0.1
-anchor_top = 0.3
-anchor_right = 0.9
-anchor_bottom = 0.3
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 0.0
-offset_bottom = 0.0
-theme_override_styles/panel = ExtResource("8")
-z_index = 10
-
-[node name="resultado" type="Label" parent="margin/contenedorResultado"]
-layout_mode = 2
-theme = ExtResource("9")
-horizontal_alignment = 1
+size_flags_vertical = 3
 
 [node name="panelArriba" type="Panel" parent="margin/horizontal"]
 custom_minimum_size = Vector2(0, 100)
@@ -145,13 +125,16 @@ theme = ExtResource("3")
 horizontal_alignment = 1
 
 [node name="contenedorBotones" type="PanelContainer" parent="margin/horizontal"]
+custom_minimum_size = Vector2(0, 520)
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_styles/panel = SubResource("5")
 
 [node name="grid" type="VBoxContainer" parent="margin/horizontal/contenedorBotones"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_constants/separation = 50
 
 [node name="opcion1" type="Button" parent="margin/horizontal/contenedorBotones/grid"]
@@ -286,6 +269,37 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4")
 
+[node name="contenedorResultado" type="PanelContainer" parent="margin"]
+z_index = 10
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("8")
+
+[node name="contenidoResultado" type="Control" parent="margin/contenedorResultado"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="resultado" type="Label" parent="margin/contenedorResultado/contenidoResultado"]
+layout_mode = 0
+anchor_right = 1.0
+offset_top = 10.0
+size_flags_horizontal = 3
+theme = ExtResource("9")
+horizontal_alignment = 1
+
+[node name="siguiente" type="Button" parent="margin/contenedorResultado/contenidoResultado"]
+custom_minimum_size = Vector2(0, 85)
+layout_mode = 0
+anchor_left = 0.1
+anchor_top = 0.7
+anchor_right = 0.9
+anchor_bottom = 0.7
+offset_top = -42.5
+offset_bottom = 42.5
+theme = ExtResource("6")
+text = "Siguiente"
+
 [node name="marginMarcador" type="MarginContainer" parent="."]
 custom_minimum_size = Vector2(0, 70)
 offset_top = 904.0
@@ -304,20 +318,35 @@ custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 theme = ExtResource("8_e46k6")
 
-[node name="marginSiguiente" type="MarginContainer" parent="."]
-custom_minimum_size = Vector2(0, 70)
-offset_right = 222.0
-offset_bottom = 85.0
+[node name="barraInferior" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(0, 100)
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 40
+theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 40
+theme_override_constants/margin_bottom = 10
 
-[node name="siguiente" type="Button" parent="marginSiguiente"]
-custom_minimum_size = Vector2(0, 85)
+[node name="filaInferior" type="HBoxContainer" parent="barraInferior"]
 layout_mode = 2
-theme = ExtResource("6")
-text = "Siguiente"
+size_flags_horizontal = 4
+theme_override_constants/separation = 20
+
+[node name="otrosJuegos" type="Button" parent="barraInferior/filaInferior"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("10_1d07u")
+text = "otros_juegos"
+
+[node name="estadisticas" type="Button" parent="barraInferior/filaInferior"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("10_1d07u")
+text = "estadisticas"
 
 [node name="publicidad" parent="." instance=ExtResource("10")]
 visible = false
@@ -326,4 +355,4 @@ visible = false
 [connection signal="pressed" from="margin/horizontal/contenedorBotones/grid/opcion2" to="." method="_on_opcion2_pressed"]
 [connection signal="pressed" from="margin/horizontal/contenedorBotones/grid/opcion3" to="." method="_on_opcion3_pressed"]
 [connection signal="pressed" from="margin/horizontal/contenedorBotones/grid/opcion4" to="." method="_on_opcion4_pressed"]
-[connection signal="pressed" from="marginSiguiente/siguiente" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="margin/contenedorResultado/contenidoResultado/siguiente" to="." method="_on_Button_pressed"]

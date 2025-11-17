@@ -4,9 +4,13 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hjo07"]
 bg_color = Color(0.08235294, 0.105882354, 0.21960784, 1)
+corner_radius_top_left = 12
+corner_radius_bottom_left = 12
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1d07u"]
 bg_color = Color(0.14117648, 0.627451, 0.30588236, 1)
+corner_radius_top_left = 12
+corner_radius_bottom_left = 12
 
 [resource]
 ProgressBar/font_sizes/font_size = 48

@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://evt3aogyijjx"]
+
+[ext_resource type="Script" uid="uid://bg35s1e6qtbhy" path="res://otros-juegos/botonPublicidad.gd" id="1_3umt5"]
+[ext_resource type="Theme" uid="uid://cb2opafs0hh3t" path="res://otros-juegos/botonPublicidad.tres" id="1_hts37"]
+
+[node name="botonPublicidad" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3umt5")
+
+[node name="boton" type="Button" parent="."]
+layout_mode = 2
+theme = ExtResource("1_hts37")
+alignment = 0
+autowrap_mode = 2
+
+[connection signal="pressed" from="boton" to="." method="_on_boton_pressed"]

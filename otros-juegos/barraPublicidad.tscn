@@ -1,0 +1,100 @@
+[gd_scene load_steps=9 format=3 uid="uid://b8pe5wss0bmqy"]
+
+[ext_resource type="FontFile" uid="uid://bobvfmjscslyw" path="res://fonts/Roboto-Regular.ttf" id="2_nrl6q"]
+
+[sub_resource type="GDScript" id="GDScript_y8q1x"]
+script/source = "extends Control
+
+
+var enlaceApp : String #enlace a la tienda de apps
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	#TAMAñOS
+	#$contenedorGeneral.size.x = Globals.tamanoPantalla.x - Globals.marcoPantalla*2
+	#$contenedorGeneral/vertical.size.x = Globals.tamanoPantalla.x - Globals.marcoPantalla*2
+	#$contenedorGeneral/vertical/margin/explicacionJuego.size = Vector2($contenedorGeneral.get_size().x-100,75)
+	#$contenedorGeneral/vertical/margin/explicacionJuego.size.x = Globals.tamanoPantalla.x - Globals.marcoPantalla*2 - 120
+	#$contenedorGeneral/enlace.size.x = Globals.tamanoPantalla.x - Globals.marcoPantalla*2
+	#$contenedorGeneral/vertical/margin/explicacionJuego.custom_minimum_size.x = Globals.tamanoPantalla.x - Globals.marcoPantalla*2 - 120
+	$contenedorGeneral.size = Vector2(900, 100)
+	#$contenedorGeneral/vertical.size = Vector2(900, 140)
+	$contenedorGeneral/vertical/margin/explicacionJuego.custom_minimum_size = Vector2(Globals.tamanoPantalla.x - Globals.marcoPantalla*2 - 120,100)
+	#POSICIONES
+	$contenedorGeneral.position = Vector2(0,0) #explicacion de la app
+
+
+func _on_enlace_pressed() -> void:
+	var err = OS.shell_open(enlaceApp)
+	if err != OK:
+		print(\"no funciona el enlace\")
+"
+
+[sub_resource type="StyleBoxFlat" id="3"]
+bg_color = Color(0.0862745, 0.0431373, 0.137255, 1)
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+
+[sub_resource type="Theme" id="4"]
+Panel/styles/panel = SubResource("3")
+
+[sub_resource type="Theme" id="2"]
+Label/font_sizes/font_size = 26
+Label/fonts/font = ExtResource("2_nrl6q")
+
+[sub_resource type="StyleBoxFlat" id="7"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+
+[sub_resource type="StyleBoxFlat" id="5"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="Theme" id="6"]
+Button/styles/hover = SubResource("7")
+Button/styles/normal = SubResource("5")
+
+[node name="barraPublicidad" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = SubResource("GDScript_y8q1x")
+
+[node name="contenedorGeneral" type="MarginContainer" parent="."]
+layout_mode = 0
+
+[node name="Panel" type="Panel" parent="contenedorGeneral"]
+layout_mode = 2
+theme = SubResource("4")
+
+[node name="vertical" type="HBoxContainer" parent="contenedorGeneral"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="marginSprite" type="MarginContainer" parent="contenedorGeneral/vertical"]
+layout_mode = 2
+
+[node name="icono" type="Sprite2D" parent="contenedorGeneral/vertical/marginSprite"]
+position = Vector2(50, 50)
+
+[node name="margin" type="MarginContainer" parent="contenedorGeneral/vertical"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 120
+
+[node name="explicacionJuego" type="Label" parent="contenedorGeneral/vertical/margin"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = SubResource("2")
+text = "Esto e suna prueba"
+autowrap_mode = 2
+
+[node name="enlace" type="Button" parent="contenedorGeneral"]
+layout_mode = 2
+theme = SubResource("6")
+
+[connection signal="pressed" from="contenedorGeneral/enlace" to="." method="_on_enlace_pressed"]
