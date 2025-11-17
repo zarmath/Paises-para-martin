@@ -79,6 +79,7 @@ const RESULT_HEIGHT_RATIO := 0.18
 const INFO_HEIGHT_RATIO := 0.32
 const RESULT_BUTTON_BOTTOM_MARGIN := 100.0
 
+# Ajusta el ancho/alto del encabezado según el tamaño de pantalla o valores fijos.
 func _update_header_width() -> void:
 	if _header_container == null:
 		return
@@ -96,6 +97,7 @@ func _update_header_width() -> void:
 		_header_container.custom_minimum_size.y = _fixed_header_height
 		_header_container.size.y = _fixed_header_height
 
+# Define el tamaño del panel de información respetando alturas mínimas y proporciones.
 func _update_info_panel_width() -> void:
 	if _info_panel == null:
 		return
@@ -113,6 +115,7 @@ func _update_info_panel_width() -> void:
 		_info_panel.custom_minimum_size.y = _fixed_info_height
 		_info_panel.size.y = _fixed_info_height
 
+# Ajusta el panel de resultados al ancho botones y contenido exigido.
 func _update_result_panel_size() -> void:
 	if _result_panel == null:
 		return
@@ -149,6 +152,7 @@ func _update_result_panel_size() -> void:
 		_result_panel.global_position = target_global_pos
 	_update_result_button_offset()
 
+# Calcula la altura mínima necesaria para el contenido del panel de resultado.
 func _get_result_content_required_height() -> float:
 	var label_height: float = _get_result_label_height()
 	var button_height: float = _get_result_button_height()
@@ -156,16 +160,19 @@ func _get_result_content_required_height() -> float:
 		return 0.0
 	return label_height + button_height + RESULT_BUTTON_BOTTOM_MARGIN
 
+# Devuelve la altura actual del label de resultado.
 func _get_result_label_height() -> float:
 	if _result_label == null:
 		return 0.0
 	return max(_result_label.size.y, _result_label.get_combined_minimum_size().y)
 
+# Devuelve la altura actual del botón siguiente.
 func _get_result_button_height() -> float:
 	if _next_button == null:
 		return 0.0
 	return max(_next_button.size.y, _next_button.get_combined_minimum_size().y)
 
+# Reposiciona el botón siguiente dentro del panel de resultados si falta espacio.
 func _update_result_button_offset() -> void:
 	if _result_panel == null or _next_button == null:
 		return
@@ -183,6 +190,7 @@ func _update_result_button_offset() -> void:
 		_result_panel.size.y = panel_height
 	# Distribución manual: no forzamos alturas de otros nodos para que puedas ajustar el botón en el editor.
 
+# Calcula y almacena alturas fijas para cada sección grande de la UI.
 func _ensure_fixed_heights() -> void:
 	if _header_container != null and _fixed_header_height <= 0.0:
 		_fixed_header_height = HEADER_FIXED_HEIGHT
@@ -202,6 +210,7 @@ func _ensure_fixed_heights() -> void:
 			i = _info_panel.get_combined_minimum_size().y
 		_fixed_info_height = max(i, DEFAULT_INFO_HEIGHT)
 
+# Aplica las alturas fijas calculadas a los paneles y sus botones.
 func _apply_fixed_heights() -> void:
 	if _header_container != null and _fixed_header_height > 0.0:
 		_header_container.custom_minimum_size.y = _fixed_header_height
@@ -223,6 +232,7 @@ func _apply_fixed_heights() -> void:
 		_info_panel.custom_minimum_size.y = _fixed_info_height
 		_info_panel.size.y = _fixed_info_height
 
+# Resetea el panel de resultado a estado oculto y con estilo base.
 func _reset_result_panel() -> void:
 	if _result_panel == null:
 		return
@@ -235,6 +245,7 @@ func _reset_result_panel() -> void:
 		_result_label.text = ""
 	_update_result_button_offset()
 
+# Ajusta dimensiones de la barra de progreso según el ancho de la pantalla.
 func _update_progress_bar_size() -> void:
 	if _progress_bar == null:
 		return
@@ -250,6 +261,7 @@ func _update_progress_bar_size() -> void:
 	_progress_bar.size.y = 120.0
 	_progress_bar.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 
+# Aplica icono y tamaño estándar a un TextureRect de información.
 func _apply_info_icon(icon_node: TextureRect, texture: Texture2D) -> void:
 	if icon_node == null:
 		return
@@ -259,6 +271,7 @@ func _apply_info_icon(icon_node: TextureRect, texture: Texture2D) -> void:
 	if texture != null:
 		icon_node.texture = texture
 
+# Escribe textos y aplica icono en una fila de información dadas las etiquetas/valores.
 func _set_info_row(label_node: Label, value_node: Label, icon_node: TextureRect, label_text: String, value_text: String, texture: Texture2D) -> void:
 	if label_node != null:
 		label_node.text = label_text + ":"
@@ -270,6 +283,7 @@ func _set_info_row(label_node: Label, value_node: Label, icon_node: TextureRect,
 			value_node.text = _wrap_info_value(clean_value)
 	_apply_info_icon(icon_node, texture)
 
+# Divide cadenas largas en varias líneas para no romper el layout.
 func _wrap_info_value(text: String, limit: int = 35) -> String:
 	# Inserta saltos de línea suaves para evitar que valores largos rompan el layout.
 	var words: Array = text.split(" ")
@@ -287,6 +301,7 @@ func _wrap_info_value(text: String, limit: int = 35) -> String:
 		lines.append(current)
 	return "\n".join(lines)
 
+# Actualiza todas las filas del panel de información con sus etiquetas traducidas.
 func _update_info_labels() -> void:
 	_set_info_row(_info_label_region, _info_value_region, _info_icon_region, _get_translated_label("region", "Region"), "", _icon_texture_region)
 	_set_info_row(_info_label_subregion, _info_value_subregion, _info_icon_subregion, _get_translated_label("subregion", "Subregion"), "", _icon_texture_subregion)
@@ -294,6 +309,7 @@ func _update_info_labels() -> void:
 	_set_info_row(_info_label_idiomas, _info_value_idiomas, _info_icon_idiomas, _get_translated_label("idiomas", "Languages"), "", _icon_texture_idiomas)
 	_set_info_row(_info_label_poblacion, _info_value_poblacion, _info_icon_poblacion, _get_translated_label("poblacion", "Population"), "", _icon_texture_poblacion)
 
+# Formatea valores de población introduciendo separadores de miles.
 func _format_population(value):
 	var digits: String = ""
 	var value_type: int = typeof(value)
@@ -325,6 +341,7 @@ func _format_population(value):
 		formatted = "-" + formatted
 	return formatted
 
+# Detecta el tamaño de fuente del theme para un Label o usa un valor de respaldo.
 func _get_label_font_size(label: Label, fallback: int) -> int:
 	if label == null:
 		return fallback
@@ -333,6 +350,7 @@ func _get_label_font_size(label: Label, fallback: int) -> int:
 		return fallback
 	return max(detected_size, fallback)
 
+# Reduce progresivamente el tamaño de la fuente hasta que el texto quepa en el ancho dado.
 func _fit_label_to_available_width(label: Label, base_size: int, min_size: int, step: int, max_width: float) -> void:
 	if label == null:
 		return
@@ -358,6 +376,8 @@ func _fit_label_to_available_width(label: Label, base_size: int, min_size: int, 
 	label.add_theme_font_size_override("font_size", font_size)
 	label.reset_size()
 
+# Ajusta los labels de país y nombre completo para que encajen en su contenedor.
+# Ajusta tamaños de labels de país y nombre completo para que no desborden.
 func _update_country_labels_layout() -> void:
 	var header_width: float = 0.0
 	if _header_container != null:
@@ -383,6 +403,7 @@ func _update_country_labels_layout() -> void:
 			nombre_width = Globals.pantallaTamano.x * 0.5
 		_fit_label_to_available_width(_full_name_label, _full_name_font_base_size, FULL_NAME_FONT_MIN_SIZE, FONT_SIZE_STEP, nombre_width)
 
+# Extrae la capital del diccionario de país, normalizando tipos.
 func _get_capital(entry) -> String:
 	if not (entry is Dictionary):
 		return ""
@@ -393,10 +414,12 @@ func _get_capital(entry) -> String:
 		return capital_value.strip_edges()
 	return ""
 
+# Traduce una clave y devuelve fallback si no hay traducción.
 func _get_translated_label(key: String, fallback: String) -> String:
 	var translated: String = tr(key)
 	return fallback if translated == key else translated
 
+# Inserta un salto de línea en nombres largos para mejorar el ajuste.
 func _insert_line_break_if_needed(name: String, limit: int = 20) -> String:
 	var trimmed: String = name.strip_edges()
 	if trimmed.length() <= limit:
@@ -412,6 +435,7 @@ func _insert_line_break_if_needed(name: String, limit: int = 20) -> String:
 		break_index = limit
 	return trimmed.substr(0, break_index).strip_edges() + "\n" + trimmed.substr(break_index).strip_edges()
 
+# Configura la escena principal: carga datos, locale, iconos y tamaños iniciales.
 func _ready():
 	# Carga datos, idioma y recursos de iconos antes de inicializar UI.
 	Globals.leer_json_total("paises_unidos")
@@ -504,12 +528,14 @@ func _ready():
 	if _bottom_button_stats != null:
 		_bottom_button_stats.pressed.connect(_on_bottom_stats_pressed)
 
+# Actualiza textos de los botones inferiores según traducción.
 func _update_bottom_buttons_text() -> void:
 	if _bottom_button_other_games != null:
 		_bottom_button_other_games.text = tr("otros_juegos")
 	if _bottom_button_stats != null:
 		_bottom_button_stats.text = tr("estadisticas")
 
+# Ajusta la barra inferior para anclarla y centrar sus botones.
 func _position_bottom_bar() -> void:
 	if _bottom_bar == null:
 		return
@@ -542,6 +568,7 @@ func _position_bottom_bar() -> void:
 			_bottom_row.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 			_bottom_row.alignment = BoxContainer.ALIGNMENT_CENTER
 
+# Carga el registro de fallos guardado en disco.
 func _load_fail_counts() -> void:
 	if not FileAccess.file_exists(FAIL_LOG_PATH):
 		_fail_counts = {}
@@ -558,6 +585,7 @@ func _load_fail_counts() -> void:
 		return
 	_fail_counts = test_json_conv.data
 
+# Guarda el registro de fallos en disco.
 func _save_fail_counts() -> void:
 	var file := FileAccess.open(FAIL_LOG_PATH, FileAccess.WRITE)
 	if file == null:
@@ -565,6 +593,7 @@ func _save_fail_counts() -> void:
 	file.store_string(JSON.stringify(_fail_counts))
 	file.close()
 
+# Incrementa contador de fallos para el país actual y lo persiste.
 func _record_fail() -> void:
 	if not (pais_actual is Dictionary):
 		return
@@ -580,6 +609,7 @@ func _record_fail() -> void:
 	_fail_counts[clave] += 1
 	_save_fail_counts()
 
+# Navega a la escena de otros juegos si está disponible.
 func _on_bottom_other_games_pressed() -> void:
 	var target_scene: String = "res://otros-juegos/otrosJuegos.tscn"
 	if ResourceLoader.exists(target_scene):
@@ -587,6 +617,7 @@ func _on_bottom_other_games_pressed() -> void:
 	else:
 		push_warning("No se encuentra la escena: " + target_scene)
 
+# Muestra estadísticas de fallos en el panel de resultados.
 func _on_bottom_stats_pressed() -> void:
 	if _result_panel != null:
 		_result_panel.show()
@@ -612,6 +643,7 @@ func _on_bottom_stats_pressed() -> void:
 	_update_result_button_offset()
 
 
+# Reacciona a cambios de tamaño de ventana recalculando layouts principales.
 func _notification(what):
 	if what == NOTIFICATION_WM_SIZE_CHANGED:
 		_update_header_width()
@@ -624,6 +656,7 @@ func _notification(what):
 		_apply_fixed_heights()
 
 
+# Selecciona un país aleatorio, rellena botones y refresca datos mostrados.
 func pais_al_azar():
 	_reset_result_panel()
 	if _next_button != null:
@@ -750,11 +783,13 @@ func pais_al_azar():
 
 
 
+# Maneja el botón "siguiente" y reinicia la ronda.
 func _on_Button_pressed():
 	pais_al_azar()
 	activar_botones()
 	_update_score_ui()
 
+# Actualiza la barra de progreso con el porcentaje de aciertos.
 func _update_score_ui() -> void:
 	if _progress_bar == null:
 		return
@@ -766,6 +801,7 @@ func _update_score_ui() -> void:
 	_progress_bar.tooltip_text = str(aciertos) + "/" + str(intentos)
 
 
+# Handler de la opción 1: verifica acierto y bloquea botones.
 func _on_opcion1_pressed():
 	if $margin/horizontal/contenedorBotones/grid/opcion1.text == capital:
 		exito = true
@@ -776,6 +812,7 @@ func _on_opcion1_pressed():
 
 
 
+# Handler de la opción 2: verifica acierto y bloquea botones.
 func _on_opcion2_pressed():
 	if $margin/horizontal/contenedorBotones/grid/opcion2.text == capital:
 		exito = true
@@ -785,6 +822,7 @@ func _on_opcion2_pressed():
 	desactivar_botones()
 
 
+# Handler de la opción 3: verifica acierto y bloquea botones.
 func _on_opcion3_pressed():
 	if $margin/horizontal/contenedorBotones/grid/opcion3.text == capital:
 		exito = true
@@ -794,6 +832,7 @@ func _on_opcion3_pressed():
 	desactivar_botones()
 
 
+# Handler de la opción 4: verifica acierto y bloquea botones.
 func _on_opcion4_pressed():
 	if $margin/horizontal/contenedorBotones/grid/opcion4.text == capital:
 		exito = true
@@ -802,6 +841,7 @@ func _on_opcion4_pressed():
 	comprobar_resultado()
 	desactivar_botones()
 
+# Muestra si la respuesta es correcta, pinta el panel y suma estadísticas.
 func comprobar_resultado():
 	if _result_panel != null:
 		_result_panel.show()
@@ -829,6 +869,7 @@ func comprobar_resultado():
 	intentos += 1
 	_update_score_ui()
 
+# Deshabilita las opciones después de responder y recalcula alturas.
 func desactivar_botones():
 	$margin/horizontal/contenedorBotones/grid/opcion1.disabled = true
 	$margin/horizontal/contenedorBotones/grid/opcion2.disabled = true
@@ -836,6 +877,7 @@ func desactivar_botones():
 	$margin/horizontal/contenedorBotones/grid/opcion4.disabled = true
 	_apply_fixed_heights()
 
+# Habilita las opciones al iniciar una nueva ronda y ajusta anchos.
 func activar_botones():
 	$margin/horizontal/contenedorBotones/grid/opcion1.disabled = false
 	$margin/horizontal/contenedorBotones/grid/opcion2.disabled = false
@@ -845,6 +887,7 @@ func activar_botones():
 		_option_buttons_grid.visible = true
 	_update_option_buttons_width()
 
+# Busca una capital alternativa para usar como opción incorrecta.
 func comprobar_capital():
 	capitalCorrecta = false
 	#print("entro en la comprobación:",capitalCorrecta)
@@ -867,6 +910,7 @@ func comprobar_capital():
 	return(capitalError)
 
 
+# Ajusta el ancho de los botones de respuesta según pantalla y alturas fijas.
 func _update_option_buttons_width() -> void:
 	if _option_buttons_panel == null:
 		return

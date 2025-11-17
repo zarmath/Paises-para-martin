@@ -7,7 +7,7 @@ var barra = preload("res://otros-juegos/botonPublicidad.tscn")
 #var transition_layer = preload("res://escenas-principales/transicion.tscn").instance()
 
 
-# Called when the node enters the scene tree for the first time.
+# Inicializa la escena, ajusta tamaños/posiciones y genera la cuadrícula de juegos.
 func _ready() -> void:
 	#add_child(transition_layer)
 	#transition_layer.start_transition2()
@@ -24,12 +24,14 @@ func _ready() -> void:
 
 
 
+# Gestiona el botón de volver a la escena principal.
 func _on_volver_pressed() -> void:
 	#volver al juegos
 	Globals.cambiarEscena("res://Scenes/principal.tscn")
 	#transition_layer.start_transition("res://principales/juego.tscn")
 
 
+# Construye la lista de otros juegos con icono, texto traducido y enlace según plataforma.
 func construir_cuadricula() -> void:
 	#construyo la cuadrícula de 'otros-juegos'
 	#var leerOtrosJuegos = Globals.leer_datos()

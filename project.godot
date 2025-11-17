@@ -13,6 +13,8 @@ config_version=5
 config/name="Paises para Martin"
 run/main_scene="res://Scenes/bienvenida.tscn"
 config/features=PackedStringArray("4.5")
+boot_splash/bg_color=Color(0.0705882, 0.0941176, 0.2, 1)
+boot_splash/image="uid://chf57bmdsap55"
 config/icon="uid://v1era4cdikff"
 
 [autoload]
@@ -39,7 +41,7 @@ translations=PackedStringArray("res://traducciones/traduccion paises para martin
 [rendering]
 
 textures/vram_compression/import_etc2_astc=true
-environment/defaults/default_clear_color=Color(0.0901961, 0.0823529, 0.333333, 1)
+environment/defaults/default_clear_color=Color(0.07058824, 0.09411765, 0.2, 1)
 environment/defaults/default_environment="res://default_env.tres"
 quality/driver/driver_name="GLES2"
 vram_compression/import_etc=true

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cupros148nxu1"]
 
 [ext_resource type="Script" uid="uid://doniuiwobe7ys" path="res://Scripts/bienvenida.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://ovbnf41v7vpj" path="res://Imagenes/splash_screen.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://b7ftis2kkpdc3" path="res://Iconos/Logo_casa_blanca.png" id="2_h0xsl"]
 
 [node name="bienvenida" type="Node2D"]
 script = ExtResource("1")
@@ -14,5 +14,5 @@ size_flags_vertical = 3
 
 [node name="imagen" type="TextureRect" parent="center"]
 layout_mode = 2
-texture = ExtResource("2")
+texture = ExtResource("2_h0xsl")
 stretch_mode = 1
