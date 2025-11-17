@@ -12,7 +12,7 @@ func _ready() -> void:
 	#add_child(transition_layer)
 	#transition_layer.start_transition2()
 	#TAMAñOS
-	$contenedorGeneral.size = Vector2(Globals.tamanoPantalla.x - Globals.marcoPantalla*2,Globals.tamanoPantalla.y - 140)
+	$contenedorGeneral.size = Vector2(Globals.pantallaTamano.x - Globals.marcoPantalla*2,Globals.pantallaTamano.y - 140)
 	#POSICIONES
 	$contenedorTitulo.position = Vector2(Globals.marcoPantalla,100)
 	#$contenedorTitulo/volver.position = Vector2(Globals.marcoPantalla,20)
@@ -26,7 +26,7 @@ func _ready() -> void:
 
 func _on_volver_pressed() -> void:
 	#volver al juegos
-	Globals.cambiarEscena("res://principales/juego.tscn")
+	Globals.cambiarEscena("res://Scenes/principal.tscn")
 	#transition_layer.start_transition("res://principales/juego.tscn")
 
 

@@ -499,6 +499,8 @@ func _ready():
 	call_deferred("_update_country_labels_layout")
 	call_deferred("_update_option_buttons_width")
 	call_deferred("_update_score_ui")
+	if _bottom_button_other_games != null:
+		_bottom_button_other_games.pressed.connect(_on_bottom_other_games_pressed)
 	if _bottom_button_stats != null:
 		_bottom_button_stats.pressed.connect(_on_bottom_stats_pressed)
 
@@ -577,6 +579,13 @@ func _record_fail() -> void:
 		_fail_counts[clave] = 0
 	_fail_counts[clave] += 1
 	_save_fail_counts()
+
+func _on_bottom_other_games_pressed() -> void:
+	var target_scene: String = "res://otros-juegos/otrosJuegos.tscn"
+	if ResourceLoader.exists(target_scene):
+		get_tree().change_scene_to_file(target_scene)
+	else:
+		push_warning("No se encuentra la escena: " + target_scene)
 
 func _on_bottom_stats_pressed() -> void:
 	if _result_panel != null:

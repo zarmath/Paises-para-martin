@@ -1,1 +1,16 @@
 res://default_env.tres
+res://Scripts/principal.gd
+res://Scenes/principal.tscn
+res://Art/nombre_pais.tres
+res://Art/nombre_capital.tres
+res://Art/informacion.tres
+res://Art/botones_opciones.tres
+res://Art/boton_recargar.tres
+res://Art/progressbartres.tres
+res://otros-juegos/otrosJuegos.gd
+res://otros-juegos/otrosJuegos.tscn
+res://Art/boton_volver.tres
+res://otros-juegos/botonPublicidad.tres
+res://traducciones/traduccion paises para martin - Hoja 1.es.translation
+res://traducciones/traduccion paises para martin - Hoja 1.en.translation
+res://Art/boton_otros.tres

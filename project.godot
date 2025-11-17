@@ -18,6 +18,7 @@ config/icon="uid://v1era4cdikff"
 [autoload]
 
 Globals="*res://Scripts/globals.gd"
+Otrosjuegosdata="*res://otros-juegos/otrosjuegosdata.gd"
 
 [display]
 

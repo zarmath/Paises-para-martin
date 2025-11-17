@@ -9,5 +9,6 @@
 Button/font_sizes/font_size = 48
 Button/fonts/font = ExtResource("1_qsqia")
 Button/styles/focus = SubResource("StyleBoxFlat_ck6n3")
+Button/styles/hover = ExtResource("2_5hqjl")
 Button/styles/normal = ExtResource("2_5hqjl")
 Button/styles/pressed = ExtResource("2_5hqjl")
