@@ -1,5 +1,5 @@
 72322a848ab928aa5c89f0cb78209805
-::res://::1763483687
+::res://::1763969826
 default_env 2.tres::Environment::-1::1762185553::0::1::::<><><>0<>0<><>::
 default_env.tres::Environment::6855617573759120025::1763414263::0::1::::<><><>0<>0<><>::
 export_presets.cfg::TextFile::-1::1763414625::0::1::::<><><>0<>0<><>::
@@ -20,10 +20,14 @@ panelArriba.tres::Theme::95999778662901090::1762191058::0::1::::<><><>0<>0<><>::
 progressbartres.tres::Theme::264731404826120204::1763413474::0::1::::<><><>0<>0<><>::uid://d1p1chq00qmoa::::res://Fonts/Montserrat-Regular.ttf
 resultado.tres::Theme::8623005142331073920::1762770212::0::1::::<><><>0<>0<><>::uid://d1p1chq00qmoa::::res://Fonts/Montserrat-Regular.ttf
 style_box_flat_siguiente.tres::StyleBoxFlat::6162501491555160535::1763326261::0::1::::<><><>0<>0<><>::
-::res://assets/::1762761155
+::res://assets/::1763970607
+background.png::CompressedTexture2D::7461857241160671131::1763970607::1763970614::1::::<><><>0<>0<>362ce37e48eeb11559d4ac3119bdbaa0<>res://.godot/imported/background.png-1fdba8b6a966ce2c2ffc607f7c096e95.ctex::
+foreground.png::CompressedTexture2D::83790908811267767::1763970580::1763970614::1::::<><><>0<>0<>5b92fe3c5a326206861ff78fe503871d<>res://.godot/imported/foreground.png-30b8717b06cbe97b74a37b5f7e1ea409.ctex::
 icono.png::CompressedTexture2D::1527912809366217415::1762435205::1762761155::1::::<><><>0<>0<>674c68f88ff4903c6fdaae52e10fa10f<>res://.godot/imported/icono.png-5663c5c0bb5273a0ce7a960a1b001efd.ctex::
 icono_dark.png::CompressedTexture2D::5185426994395703256::1762760558::1762761155::1::::<><><>0<>0<>12f156ba6f571beca424300897bd9dc1<>res://.godot/imported/icono_dark.png-57df58a1d97903b154ab69a4e408b118.ctex::
 icono_tinted.png::CompressedTexture2D::7442032788662108251::1762760673::1762761155::1::::<><><>0<>0<>b71720cb99d937a604c553e7e572abe4<>res://.godot/imported/icono_tinted.png-b386d75c1329343daf60ba704e7e3ba8.ctex::
+main.png::CompressedTexture2D::362365931710553862::1763970459::1763970614::1::::<><><>0<>0<>7b3cbe85b6f4846303a25185daa7a07c<>res://.godot/imported/main.png-aabefee79c7f3cbaaa4bf9c666127ed5.ctex::
+monochrome.png::CompressedTexture2D::3176256810090962696::1763970550::1763970614::1::::<><><>0<>0<>2efd31969287afa383cd995f72cc701d<>res://.godot/imported/monochrome.png-5b80d66fca5c7b0dfa18a98a3f34769c.ctex::
 ::res://Data/::1762245445
 data.json::JSON::-1::1763325100::0::1::::<><><>0<>0<><>::
 paises_unidos.json::JSON::-1::1762245445::0::1::::<><><>0<>0<><>::
@@ -33,7 +37,7 @@ Montserrat-Bold.ttf::FontFile::1940532393961340468::1323730800::1762185607::1:::
 Montserrat-Regular.ttf::FontFile::9016720258929038524::1608619988::1762185607::1::::<><><>0<>0<>80549d18e3a1829eca0a295cc7614bf3<>res://.godot/imported/Montserrat-Regular.ttf-93ee872dd9e789d0c6de3f86a1d6827c.fontdata::
 Roboto-Regular.ttf::FontFile::9161789461757740189::1760804045::1763366591::1::::<><><>0<>0<>def40d3cbbe7ee33299943c7b8efaab8<>res://.godot/imported/Roboto-Regular.ttf-53299d412e710e22f7b066c65749c529.fontdata::
 zorque.ttf::FontFile::6350249285737295435::1608619988::1762185607::1::::<><><>0<>0<>645bbc8dadfce9dee12499c09c0c7e06<>res://.godot/imported/zorque.ttf-898016e593a99dd69269e8b2a5930a26.fontdata::
-::res://Iconos/::1763413352
+::res://Iconos/::1763566953
 icono_atras.png::CompressedTexture2D::4788009561431687283::1760804045::1763366527::1::::<><><>0<>0<>8759f04a575c957332f3d412b7dc0ca9<>res://.godot/imported/icono_atras.png-7fbfed4f945f000778c88d818f84a431.ctex::
 icono_idiomas.png::CompressedTexture2D::8792661737624777651::1763279238::1763279332::1::::<><><>0<>0<>939bda355a9fd2adb385f16347d1c8c9<>res://.godot/imported/icono_idiomas.png-ac7421d65216ba39a991cd42d3ff098a.ctex::
 icono_moneda.png::CompressedTexture2D::6583926038629744107::1763279258::1763279332::1::::<><><>0<>0<>83145ab66c17769f330c5332e2e2ca12<>res://.godot/imported/icono_moneda.png-02ad1282d6f94cee49fa698db293e4c8.ctex::
